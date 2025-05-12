@@ -7,23 +7,75 @@
 
 import UIKit
 
-class OnboardingPageViewController: UIPageViewController {
+class OnboardingPageViewController: UIPageViewController  , UIPageViewControllerDelegate,
+                                    UIPageViewControllerDataSource {
+    
+    
+    
+    
+    var arr: [UIViewController] = []
+    var pageControl = UIPageControl()
+
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard let currentView = arr.firstIndex(of: viewController) else {
+            
+            return nil ;
+        }
+        
+        
+        if   currentView-1 >= 0 {
+            
+            return arr[currentView-1]
+        }
+        return nil
+
+     }
+
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+         guard let currentIndex = arr.firstIndex(of: viewController), currentIndex < (arr.count - 1) else {
+             return nil
+         }
+         return arr[currentIndex + 1]
+     }
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+   
+        self.delegate   = self
+        self.dataSource = self
+
+        
+        let v1  = self.storyboard?.instantiateViewController(withIdentifier: "on1")
+        let v2  = self.storyboard?.instantiateViewController(withIdentifier: "on2")
+        let v3  = self.storyboard?.instantiateViewController(withIdentifier: "on3")
+        let v4  = self.storyboard?.instantiateViewController(withIdentifier: "on4")
+        
+        arr.append(v1!)
+        arr.append(v2!)
+        arr.append(v3!)
+        arr.append(v4!)
+
+        if let v1 = arr.first {
+            setViewControllers(
+                [v1],
+                direction: .forward,
+                animated: true ,
+                completion: nil
+            )
+            
+            
+        }
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool,
+                              previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+          if completed, let currentVC = viewControllers?.first, let index = arr.firstIndex(of: currentVC) {
+              pageControl.currentPage = index
+          }
+      }
+    
 }
