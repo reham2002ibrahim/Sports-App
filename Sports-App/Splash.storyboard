@@ -12,22 +12,23 @@
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="splashScreen" id="Y6W-OH-hqX" customClass="SplashViewController" customModule="Sports_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                    <view key="view" contentMode="scaleAspectFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleAspectFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Xcu-4O-OEc">
-                                <rect key="frame" x="-10" y="-26" width="413" height="905"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Xcu-4O-OEc">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Xcu-4O-OEc" secondAttribute="trailing" constant="-10" id="1j1-QU-o9V"/>
-                            <constraint firstAttribute="bottom" secondItem="Xcu-4O-OEc" secondAttribute="bottom" constant="-27" id="Fj0-nu-zE9"/>
-                            <constraint firstItem="Xcu-4O-OEc" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="-26" id="iSF-C0-SXw"/>
-                            <constraint firstItem="Xcu-4O-OEc" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="-10" id="ru1-pb-GuI"/>
+                            <constraint firstItem="Xcu-4O-OEc" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="4C1-Or-Veh"/>
+                            <constraint firstItem="Xcu-4O-OEc" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Fmc-uk-jh6"/>
+                            <constraint firstItem="Xcu-4O-OEc" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="LA8-Ns-FBy"/>
+                            <constraint firstItem="Xcu-4O-OEc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="WNw-GA-G5a"/>
+                            <constraint firstAttribute="bottom" secondItem="Xcu-4O-OEc" secondAttribute="bottom" id="odb-dZ-z0P"/>
+                            <constraint firstItem="Xcu-4O-OEc" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="s3T-lR-Dtt"/>
                         </constraints>
                     </view>
                     <connections>
