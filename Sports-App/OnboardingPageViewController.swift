@@ -40,18 +40,25 @@ class OnboardingPageViewController: UIPageViewController  , UIPageViewController
                 return arr[currentIndex + 1]
             } else {
                 goToHomeScreen()
+                UserDefaults.standard.set(true, forKey: "userLogged")
                 return nil
             }
         }
     
-        func goToHomeScreen() {
+    func goToHomeScreen() {
+        let storyboard = UIStoryboard(name: "RehamStoryboard", bundle: nil)
+        
+        if let tabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as? UITabBarController {
             
-            if let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "homeViewController") as? HomeViewController {
-                
-                self.navController.pushViewController(homeVC, animated: true)
-                
+            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                sceneDelegate.window?.rootViewController = tabBar
+                sceneDelegate.window?.makeKeyAndVisible()
+            } else {
+                self.present(tabBar, animated: true, completion: nil)
             }
         }
+    }
+
             
             
     
