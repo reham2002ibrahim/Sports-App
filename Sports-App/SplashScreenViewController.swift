@@ -37,11 +37,23 @@ class SplashViewController: UIViewController {
             animationView.play { [weak self] finished in
                 if finished {
                     let storyboard = UIStoryboard(name: "RehamStoryboard", bundle: nil)
-                    if let rehamVC = storyboard.instantiateViewController(withIdentifier: "OnboardingPageViewController") as? OnboardingPageViewController {
-                        
-                        rehamVC.navController = self?.navController
-                        
-                        self?.navController?.pushViewController(rehamVC, animated: true)
+                    let userLogged = UserDefaults.standard.bool(forKey: "userLogged")
+                    if !userLogged {
+                        if let rehamVC = storyboard.instantiateViewController(withIdentifier: "OnboardingPageViewController") as? OnboardingPageViewController {
+                            
+                            rehamVC.navController = self?.navController
+                            self?.navController?.pushViewController(rehamVC, animated: true)
+                        }
+                    }
+                    else { 
+                                                
+                        if let tabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as? UITabBarController {
+                            
+                            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                                sceneDelegate.window?.rootViewController = tabBar
+                                sceneDelegate.window?.makeKeyAndVisible()
+                            }
+                        }
                         
                         
                     }
