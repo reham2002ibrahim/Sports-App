@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0455AC842DD9181A00D675BE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0455AC832DD9181A00D675BE /* Alamofire */; };
 		D260AE5A2DD2376D00286866 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D260AE592DD2376D00286866 /* Lottie */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D260AE5A2DD2376D00286866 /* Lottie in Frameworks */,
+				0455AC842DD9181A00D675BE /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = "Sports-App";
 			packageProductDependencies = (
 				D260AE592DD2376D00286866 /* Lottie */,
+				0455AC832DD9181A00D675BE /* Alamofire */,
 			);
 			productName = "Sports-App";
 			productReference = 04BB97BB2DD136E6003A443A /* Sports-App.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D260AE582DD2376D00286866 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				0455AC822DD9181A00D675BE /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 04BB97BC2DD136E6003A443A /* Products */;
@@ -344,6 +348,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0455AC822DD9181A00D675BE /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 		D260AE582DD2376D00286866 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -355,6 +367,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0455AC832DD9181A00D675BE /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0455AC822DD9181A00D675BE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		D260AE592DD2376D00286866 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D260AE582DD2376D00286866 /* XCRemoteSwiftPackageReference "lottie-ios" */;
