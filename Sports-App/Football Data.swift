@@ -15,10 +15,10 @@ struct FLeagueResponse : Codable {
 struct FLeague: Codable {
     let leagueKey: Int
     let leagueName: String
-    let countryKey: Int
-    let countryName: String
-    let leagueLogo: String
-    let countryLogo: String
+    let countryKey: Int?
+    let countryName: String?
+    let leagueLogo: String?
+    let countryLogo: String?
 
     enum CodingKeys: String, CodingKey {
         case leagueKey = "league_key"
@@ -67,10 +67,11 @@ struct FTeamResponse: Codable {
 }
 
 struct FTeam: Codable {
-    let teamKey: String
-    let teamName: String
-    let teamLogo: String
-    let players: [FPlayer]
+//    let teamKey: String
+    let teamKey: Int?
+    let teamName: String?
+    let teamLogo: String?
+    let players: [FPlayer]?
 
     enum CodingKeys: String, CodingKey {
         case teamKey = "team_key"
@@ -88,10 +89,10 @@ struct FPlayerResponse: Codable {
 }
 
 struct FPlayer: Codable {
-    let playerKey: Int
-    let playerName: String
-    let playerNumber: String
-    let playerImage: String
+    let playerKey: Int?
+    let playerName: String?
+    let playerNumber: String?
+    let playerImage: String?
 
     enum CodingKeys: String, CodingKey {
         case playerKey = "player_key"

@@ -7,27 +7,14 @@
 
 import UIKit
 
-class TeamsViewController: UIViewController , UITableViewDelegate, UITableViewDataSource  {
+class TeamsViewController: UIViewController , UITableViewDelegate, UITableViewDataSource , PlayersViewProtocol {
+  
 
+
+    var players: [FPlayer] = []
+      var presenter = PlayersPresenter()
+      var teamId: Int = 96
     
-    var players :  [Player] = [
-        Player (
-            playerName: "player1",
-            playerTshirt: "11",
-            playerImg: UIImage(named: "footballonbording")!) ,
-        Player (
-            playerName: "player2",
-            playerTshirt: "22",
-            playerImg: UIImage(named: "footballonbording")!) ,
-        Player (
-            playerName: "player3",
-            playerTshirt: "33",
-            playerImg: UIImage(named: "footballonbording")!) ,
-        Player (
-            playerName: "player4",
-            playerTshirt: "44",
-            playerImg: UIImage(named: "footballonbording")!)
-    ]
         
     @IBOutlet weak var teamName: UIView!
     @IBOutlet weak var teamImg: UIImageView!
@@ -39,10 +26,24 @@ class TeamsViewController: UIViewController , UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         teamTable.delegate = self
         teamTable.dataSource = self
+        presenter.attachView(self)
+        presenter.fetchPlayers(for: teamId)
         
         teamTableStyle()
         teamImg.layer.cornerRadius = 25
 
+    }
+    
+    func displayPlayers(_ players: [FPlayer]) {
+          self.players = players
+          DispatchQueue.main.async {
+              self.teamTable.reloadData()
+          }
+      }
+
+
+    func showError(_ message: String) {
+        print("Error loading players: \(message)")
     }
     
     
@@ -62,12 +63,21 @@ class TeamsViewController: UIViewController , UITableViewDelegate, UITableViewDa
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamsTableViewCell
-        
-
         let player = players[indexPath.row]
 
-        cell.playerImg.image = player.playerImg
         cell.playerName.text = player.playerName
+        cell.playerTshirt.text = player.playerNumber
+
+        if let url = URL(string: player.playerImage ?? "myBackground") {
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: url) {
+                    DispatchQueue.main.async {
+                        cell.playerImg.image = UIImage(data: data)
+                    }
+                }
+            }
+        }
+
         cell.contentView.layer.borderWidth = 0.5
         cell.contentView.layer.borderColor = UIColor.link.cgColor
 
@@ -88,13 +98,3 @@ class TeamsViewController: UIViewController , UITableViewDelegate, UITableViewDa
 
 }
 
-
-struct Player {
-    
-    var playerName : String
-    var playerTshirt : String
-    var playerImg : UIImage
-
-    
-    
-}
