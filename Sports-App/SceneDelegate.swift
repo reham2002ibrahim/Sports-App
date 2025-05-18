@@ -17,10 +17,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let splashStoryboard = UIStoryboard(name: "Splash", bundle: nil)
-        let splashViewController = splashStoryboard.instantiateViewController(withIdentifier: "splashScreen") as! SplashViewController
+        let splashStoryboard = UIStoryboard(name: "Leagues", bundle: nil)
+        
+
+        let splashViewController = splashStoryboard.instantiateViewController(withIdentifier: "leaguesVC") as! LeaguesViewController
         let navController = UINavigationController(rootViewController: splashViewController)
-        splashViewController.inject(navController: navController)
+     //  splashViewController.inject(navController: navController)
         window=UIWindow(windowScene: windowScene)
         window?.rootViewController = navController
         window?.makeKeyAndVisible()

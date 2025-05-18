@@ -115,6 +115,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D260AE582DD2376D00286866 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				D2B524912DD9B8600076D5FE /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 04BB97BC2DD136E6003A443A /* Products */;
@@ -350,6 +351,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.5.1;
+			};
+		};
+		D2B524912DD9B8600076D5FE /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.9.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
