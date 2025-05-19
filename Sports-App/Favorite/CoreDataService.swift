@@ -22,19 +22,31 @@ class CoreDataService {
     
     
     func addLeague(to entityName: String, id: Int, name: String, img: String) {
-            guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) else { return }
-            
-            let league = NSManagedObject(entity: entity, insertInto: context)
-            league.setValue(id, forKey: "leagueId")
-            league.setValue(name, forKey: "leagueName")
-            league.setValue(img, forKey: "leagueImg")
-            
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        fetchRequest.predicate = NSPredicate(format: "leagueId == %d", id)
+        fetchRequest.fetchLimit = 1
+        
         do {
+            let results = try context.fetch(fetchRequest)
+            
+            if let existingLeague = results.first {
+                existingLeague.setValue(name, forKey: "leagueName")
+                existingLeague.setValue(img, forKey: "leagueImg")
+            } else {
+                guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) else { return }
+                let newLeague = NSManagedObject(entity: entity, insertInto: context)
+                newLeague.setValue(id, forKey: "leagueId")
+                newLeague.setValue(name, forKey: "leagueName")
+                newLeague.setValue(img, forKey: "leagueImg")
+            }
+            
             try context.save()
         } catch {
-            print("Can't  save \(error)")
+            print("Error \(error)")
+            context.rollback()
         }
-        }
+    }
     
 
     func getAllLeagues(from entityName: String) -> [NSManagedObject] {
