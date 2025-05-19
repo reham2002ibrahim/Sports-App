@@ -4,20 +4,40 @@
         <attribute name="leagueId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="leagueImg" optional="YES" attributeType="String"/>
         <attribute name="leagueName" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="leagueId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="CricketTable" representedClassName="CricketTable" syncable="YES" codeGenerationType="class">
         <attribute name="leagueId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="leagueImg" optional="YES" attributeType="String"/>
         <attribute name="leagueName" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="leagueId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="FootballTable" representedClassName="FootballTable" syncable="YES" codeGenerationType="class">
         <attribute name="leagueId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="leagueImg" optional="YES" attributeType="String"/>
         <attribute name="leagueName" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="leagueId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="TennisTable" representedClassName="TennisTable" syncable="YES" codeGenerationType="class">
         <attribute name="leagueId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="leagueImg" optional="YES" attributeType="String"/>
         <attribute name="leagueName" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="leagueId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
 </model>
