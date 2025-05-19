@@ -9,6 +9,9 @@ import Foundation
 import Alamofire
 
 class NetworkService {
+    
+    private static let apiKey = "8526db2c8daaf7d2d61118d6f06f42aacb0ca62930f94b6c94bf9d5692fbd2cf"
+    
     static func fetchData<T: Decodable>(
         urlString: String,
         responseType: T.Type,
