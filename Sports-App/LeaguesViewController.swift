@@ -12,9 +12,10 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
     @IBOutlet weak var leaguesTable: UITableView!
     
     let nib = UINib(nibName: "LeaguesCellTableViewCell", bundle: nil)
-    
-    
     var leaguesArray:[String] = ["dd","ss","uvigswvigerigh","","ddddddddddddddddddddddddddddddddddddddddddd"]
+    
+    var sportType : Int?
+    var navController = UINavigationController()
     
 
     override func viewDidLoad() {
@@ -22,8 +23,6 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
         leaguesTable.dataSource = self
         leaguesTable.delegate = self
         self.leaguesTable.register(nib, forCellReuseIdentifier: "leaguesCell")
-
-        // Do any additional setup after loading the view.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

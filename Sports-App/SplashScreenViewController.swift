@@ -14,7 +14,7 @@ class SplashViewController: UIViewController {
     private var animationView: LottieAnimationView?
     private var navController : UINavigationController!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
@@ -30,40 +30,30 @@ class SplashViewController: UIViewController {
             animationView?.transform = CGAffineTransform(scaleX:1.02  , y: 1.02 )
         }
         animationView?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-
-       
+        
         if let animationView = animationView {
             lottieContainer.addSubview(animationView)
             animationView.play { [weak self] finished in
-                if finished {
-                    let storyboard = UIStoryboard(name: "RehamStoryboard", bundle: nil)
-                    let userLogged = UserDefaults.standard.bool(forKey: "userLogged")
-                    if !userLogged {
-                        if let rehamVC = storyboard.instantiateViewController(withIdentifier: "OnboardingPageViewController") as? OnboardingPageViewController {
-                            
-                            rehamVC.navController = self?.navController
-                            self?.navController?.pushViewController(rehamVC, animated: true)
-                        }
+                guard let self = self, finished else { return }
+                
+                let storyboard = UIStoryboard(name: "RehamStoryboard", bundle: nil)
+                let userLogged = UserDefaults.standard.bool(forKey: "userLogged")
+                
+                if !userLogged {
+                    let onboardingVC = storyboard.instantiateViewController(withIdentifier: "OnboardingPageViewController") as! OnboardingPageViewController
+                    self.navigationController?.pushViewController(onboardingVC, animated: true)
+                } else {
+                    guard let tabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as? UITabBarController else {
+                        print("Failed to instantiate the tab bar controller")
+                        return
                     }
-                    else { 
-                                                
-                        if let tabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as? UITabBarController {
-                            
-                            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                                sceneDelegate.window?.rootViewController = tabBar
-                                sceneDelegate.window?.makeKeyAndVisible()
-                            }
-                        }
-                        
-                        
-                    }
+                    tabBar.navigationItem.hidesBackButton = true
+                    tabBar.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+                    self.navigationController?.pushViewController(tabBar, animated: true)
                 }
             }
         }
-    }
-    func inject(navController:UINavigationController){
-        self.navController = navController
         
     }
 }
-
+    
