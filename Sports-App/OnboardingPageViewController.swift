@@ -7,12 +7,10 @@
 
 import UIKit
 
-class OnboardingPageViewController: UIPageViewController  , UIPageViewControllerDelegate,
-                                    UIPageViewControllerDataSource {
+class OnboardingPageViewController: UIPageViewController  , UIPageViewControllerDelegate,UIPageViewControllerDataSource {
     
     
     
-    var navController : UINavigationController!
     var arr: [UIViewController] = []
     var pageControl = UIPageControl()
 
@@ -47,16 +45,27 @@ class OnboardingPageViewController: UIPageViewController  , UIPageViewController
     
     func goToHomeScreen() {
         let storyboard = UIStoryboard(name: "RehamStoryboard", bundle: nil)
-        
-        if let tabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as? UITabBarController {
-            
-            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                sceneDelegate.window?.rootViewController = tabBar
-                sceneDelegate.window?.makeKeyAndVisible()
-            } else {
-                self.present(tabBar, animated: true, completion: nil)
-            }
+        guard let tabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as? UITabBarController else {
+            print("Failed to instantiate the tab bar controller")
+            return
         }
+        tabBar.navigationItem.hidesBackButton = true
+        tabBar.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        self.navigationController?.pushViewController(tabBar, animated: true)
+//        let storyboard = UIStoryboard(name: "RehamStoryboard", bundle: nil)
+//        
+ //let tabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as? UITabBarController {
+//
+//            
+//            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+//                UIView.transition(with: sceneDelegate.window!, duration: 0.5, options: .transitionCrossDissolve, animations: {
+//                    sceneDelegate.window?.rootViewController = tabBar
+//                   })
+//                sceneDelegate.window?.makeKeyAndVisible()
+//            } else {
+//                self.present(tabBar, animated: true, completion: nil)
+//           }
+        //}
     }
 
             

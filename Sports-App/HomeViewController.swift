@@ -18,8 +18,29 @@ class HomeViewController: UIViewController,  UICollectionViewDelegateFlowLayout,
         ("Tennis", "tennisonbording"),
         ("Cricket", "cricketonbording")
     ]
-
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var sportsLbl: UILabel!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+
+
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionViewStyle()
+       
+       
+            
+            //self?.navController?.pushViewController(leaguesVC, animated: true)
+            
+            
+            
+        }
+    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HomeCollectionViewCell
 
@@ -30,29 +51,6 @@ class HomeViewController: UIViewController,  UICollectionViewDelegateFlowLayout,
 
         return cell
     }
-
-
-    
-    
-    
-    @IBOutlet weak var collectionView: UICollectionView!
-
-    @IBOutlet weak var sportsLbl: UILabel!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionViewStyle()
-
-
-    
-    }
-    
-
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let spacing: CGFloat = 10
@@ -76,6 +74,13 @@ class HomeViewController: UIViewController,  UICollectionViewDelegateFlowLayout,
         return 4
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Leagues", bundle: nil)
+        let leaguesVC = storyboard.instantiateViewController(withIdentifier: "leaguesVC") as! LeaguesViewController
+        leaguesVC.sportType = indexPath.row
+        self.navigationController?.pushViewController(leaguesVC, animated: true) 
+    }
+    
 
     func collectionViewStyle() {
         collectionView.layer.cornerRadius = 25
@@ -87,6 +92,10 @@ class HomeViewController: UIViewController,  UICollectionViewDelegateFlowLayout,
         collectionView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
         collectionView.clipsToBounds = false
     }
+    
+    
+    
+    
 
 
 
