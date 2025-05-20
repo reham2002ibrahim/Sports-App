@@ -12,10 +12,17 @@ struct CLeagueResponse: Codable {
     let result: [CLeague]
 }
 
+
 struct CLeague: Codable {
     let leagueKey: Int
     let leagueName: String
     let leagueYear: String
+
+    enum CodingKeys: String, CodingKey {
+        case leagueKey = "league_key"
+        case leagueName = "league_name"
+        case leagueYear = "league_year"
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////

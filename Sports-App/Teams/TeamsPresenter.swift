@@ -18,7 +18,7 @@ class PlayersPresenter {
         let apiKey = "8526db2c8daaf7d2d61118d6f06f42aacb0ca62930f94b6c94bf9d5692fbd2cf"
         let url = "https://apiv2.allsportsapi.com/football/?met=Teams&APIkey=\(apiKey)&teamId=\(teamId)"
         
-        NetworkService.fetchData(urlString: url, responseType: FTeamResponse.self) { [weak self] result in
+        xNetworkService.fetchData(urlString: url, responseType: FTeamResponse.self) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let teamResponse):

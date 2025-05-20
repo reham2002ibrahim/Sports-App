@@ -13,29 +13,29 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
     @IBOutlet weak var mySegment: UISegmentedControl!
 
     @IBOutlet weak var favoriteTable: UITableView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        mySegment.selectedSegmentIndex = 0
+        favoriteTable.reloadData()
+
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         favoriteTable.delegate = self
         favoriteTable.dataSource = self
         favoriteTableStyle()
+        
+        mySegment.selectedSegmentIndex = 0
 
-        CoreDataService.shared.addLeague(to: "FootballTable", id: 1, name: "Premier League", img: "premier.png")
-//                CoreDataService.shared.addLeague(to: "FootballTable", id: 12, name: "Premier League", img: "premier.png")
-                
-                CoreDataService.shared.addLeague(to: "FootballTable", id: 121, name: "same League", img: "premier.png")
-        
-        CoreDataService.shared.addLeague(to: "FootballTable", id: 121, name: "same League", img: "premier.png")
-        
+//        CoreDataService.shared.addLeague(to: "FootballTable", id: 1, name: "Premier League", img: "premier.png")
+ 
         let nib = UINib(nibName: "CustomFavTableViewCell", bundle: nil)
         self.favoriteTable!
             .register(nib, forCellReuseIdentifier: reuseIdentifier)
-        
+        favoriteTable.reloadData()
 
-        // Do any additional setup after loading the view.
     }
-    
-    //    CoreDataService.shared.addLeague(to: "FootballTable", id: 1, name: "Premier League", img: "premier.png")
-    
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         favoriteTable.reloadData()
@@ -75,13 +75,19 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
             let league = leagues[indexPath.row]
             cell.favName.text = league.value(forKey: "leagueName") as? String
             
-            if let imgStr = league.value(forKey: "leagueImg") as? String,
-               let url = URL(string: imgStr),
-               let data = try? Data(contentsOf: url) {
-                cell.favImg.image = UIImage(data: data)
-            } else {
-                cell.favImg.image = UIImage(named: "leaguePlaceHolder")
-            }
+        if let imgStr = league.value(forKey: "leagueImg") as? String,
+           let url = URL(string: imgStr) {
+            cell.favImg.image = UIImage(named: "leaguePlaceHolder")
+            URLSession.shared.dataTask(with: url) { data, _, _ in
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        cell.favImg.image = image
+                    }
+                }
+            }.resume()
+        } else {
+            cell.favImg.image = UIImage(named: "leaguePlaceHolder")
+        }
             
 
 
