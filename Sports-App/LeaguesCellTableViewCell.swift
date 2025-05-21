@@ -6,14 +6,21 @@
 //
 
 import UIKit
+import UIView_Shimmer
 
-class LeaguesCellTableViewCell: UITableViewCell {
+class LeaguesCellTableViewCell: UITableViewCell , ShimmeringViewProtocol{
 
     @IBOutlet weak var favBtn: UIImageView!
     @IBOutlet weak var leagueImage: UIImageView!
     @IBOutlet weak var leagueTitle: UILabel!
     var isFavSelected = false
     var onFavTapped: (() -> Void)?
+    
+    var shimmeringAnimatedItems: [UIView] {
+           [leagueImage, leagueTitle, favBtn]
+       }
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -42,8 +49,9 @@ class LeaguesCellTableViewCell: UITableViewCell {
     }
     
     
-    func configure(with name: String, imageUrl: String?) {
+    func renderCell(with name: String, imageUrl: String?) {
         leagueTitle.text = name
+        leagueImage.image = UIImage(named: "leaguePlaceHolder")
         if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
             URLSession.shared.dataTask(with: url) { data, _, _ in
                 if let data = data {
@@ -52,10 +60,14 @@ class LeaguesCellTableViewCell: UITableViewCell {
                     }
                 }
             }.resume()
-        } else {
-            leagueImage.image = UIImage(named: "leaguePlaceHolder")
-        }
+        } 
     }
+    
+    func updateFavIcon(isFavorite: Bool) {
+        isFavSelected = isFavorite
+        favBtn.tintColor = isFavorite ? .systemPink : .link
+    }
+    
     
     @objc private func favBtnTapped() {
         onFavTapped?()

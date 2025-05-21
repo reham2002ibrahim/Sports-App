@@ -82,5 +82,20 @@ class CoreDataService {
     
     
     
+    func isLeagueFavorite(in tableName: String, id: Int) -> Bool {
+          let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: tableName)
+          fetchRequest.predicate = NSPredicate(format: "leagueId == %d", id)
+          
+          do {
+              let results = try context.fetch(fetchRequest)
+              return !results.isEmpty
+          } catch {
+              print("Error checking fv: \(error)")
+              return false
+          }
+      }
+    
+    
+    
     
 }

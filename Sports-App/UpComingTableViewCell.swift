@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 class UpComingTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     @IBOutlet weak var matchesCollectionView: UICollectionView!
+    var matches : [Any]?
+    var sportsType : MySportType?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,20 +34,94 @@ class UpComingTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollec
     //
     //        // Configure the view for the selected state
     //    }
+    
+    func reloading(){
+        matchesCollectionView.reloadData()
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return matches?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcomingMatchesCollectionCell", for: indexPath) as! UpComingCollectionViewCell
-        cell.homeTeamLabel.text = "Team A"
-        cell.awayTeamLabel.text = "Team B"
-        cell.awayTeamLogo.image = UIImage(named: "footballonbording")
-        cell.homeTeamLogo.image = UIImage(named: "footballonbording")
-        cell.timeLabel.text = "12:00 PM"
-        cell.dateLabel.text = "20 May 2025"
-        return cell
+        switch self.sportsType {
+        case .football:
+            let fMatches : FMatch = matches?[indexPath.item] as! FMatch
+            print(fMatches)
+            cell.homeTeamLabel.text = fMatches.eventHomeTeam
+            cell.awayTeamLabel.text = fMatches.eventAwayTeam
+            if let urlString = fMatches.awayTeamLogo, let url = URL(string: urlString) {
+                cell.awayTeamLogo.kf.setImage(with: url)
+            } else {
+                cell.awayTeamLogo.image = UIImage(named: "teamsPlaceHolder")
+            }
+            if let urlString = fMatches.homeTeamLogo, let url = URL(string: urlString) {
+                cell.homeTeamLogo.kf.setImage(with: url)
+            } else {
+                cell.homeTeamLogo.image = UIImage(named: "teamsPlaceHolder")
+            }
+            cell.timeLabel.text = fMatches.eventTime
+            cell.dateLabel.text = fMatches.eventDate
+            return cell
+        case .basketball:
+            let bMatches : BFixtureContainer = matches?[indexPath.item] as! BFixtureContainer
+            cell.homeTeamLabel.text = bMatches.eventHomeTeam
+            cell.awayTeamLabel.text = bMatches.eventAwayTeam
+            if let urlString = bMatches.eventAwayTeamLogo, let url = URL(string: urlString) {
+                cell.awayTeamLogo.kf.setImage(with: url)
+            } else {
+                cell.awayTeamLogo.image = UIImage(named: "teamsPlaceHolder")
+            }
+            if let urlString = bMatches.eventHomeTeamLogo, let url = URL(string: urlString) {
+                cell.homeTeamLogo.kf.setImage(with: url)
+            } else {
+                cell.homeTeamLogo.image = UIImage(named: "teamsPlaceHolder")
+            }
+            cell.timeLabel.text = bMatches.eventTime
+            cell.dateLabel.text = bMatches.eventDate
+            return cell
+        case .tennis:
+            let tMatch : TMatch = matches?[indexPath.item] as! TMatch
+            cell.homeTeamLabel.text = tMatch.eventFirstPlayer
+            cell.awayTeamLabel.text = tMatch.eventSecondPlayer
+            if let urlString = tMatch.eventSecondPlayerLogo, let url = URL(string: urlString) {
+                cell.awayTeamLogo.kf.setImage(with: url)
+            } else {
+                cell.awayTeamLogo.image = UIImage(named: "teamsPlaceHolder")
+            }
+            if let urlString = tMatch.eventSecondPlayerLogo, let url = URL(string: urlString) {
+                cell.homeTeamLogo.kf.setImage(with: url)
+            } else {
+                cell.homeTeamLogo.image = UIImage(named: "teamsPlaceHolder")
+            }
+            cell.timeLabel.text = tMatch.eventTime
+            cell.dateLabel.text = tMatch.eventDate
+            return cell
+        case .cricket:
+            let cMatches : CMatch = matches?[indexPath.item] as! CMatch
+            cell.homeTeamLabel.text = cMatches.eventHomeTeam
+            cell.awayTeamLabel.text = cMatches.eventAwayTeam
+            if let urlString = cMatches.eventAwayTeamLogo, let url = URL(string: urlString) {
+                cell.awayTeamLogo.kf.setImage(with: url)
+            } else {
+                cell.awayTeamLogo.image = UIImage(named: "teamsPlaceHolder")
+            }
+            if let urlString = cMatches.eventHomeTeamLogo, let url = URL(string: urlString) {
+                cell.homeTeamLogo.kf.setImage(with: url)
+            } else {
+                cell.homeTeamLogo.image = UIImage(named: "teamsPlaceHolder")
+            }
+            cell.timeLabel.text = cMatches.eventTime
+            cell.dateLabel.text = cMatches.eventDateStart
+            return cell
+            
+            default :
+            return cell
+            
+            
+        }
+      
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {

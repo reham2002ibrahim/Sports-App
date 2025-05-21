@@ -31,7 +31,7 @@ struct BLeague: Codable {
 
 struct BFixtureResponse : Codable{
     let success : Int
-    let result : [BLeague]
+    let result : [BFixtureContainer]
 }
 
 struct BFixtureContainer: Codable {
@@ -39,10 +39,13 @@ struct BFixtureContainer: Codable {
     let eventDate: String
     let eventTime: String
     let eventHomeTeam: String
+    let homeTeamKey: Int?          // Add missing fields
     let eventAwayTeam: String
+    let awayTeamKey: Int?          // Add missing fields
     let eventFinalResult: String
     let eventStatus: String
     let leagueKey: Int
+    let leagueName: String?        // Add missing fields
     let eventLive: String
     let eventHomeTeamLogo: String?
     let eventAwayTeamLogo: String?
@@ -52,10 +55,13 @@ struct BFixtureContainer: Codable {
         case eventDate = "event_date"
         case eventTime = "event_time"
         case eventHomeTeam = "event_home_team"
+        case homeTeamKey = "home_team_key"      // Map to JSON key
         case eventAwayTeam = "event_away_team"
+        case awayTeamKey = "away_team_key"      // Map to JSON key
         case eventFinalResult = "event_final_result"
         case eventStatus = "event_status"
         case leagueKey = "league_key"
+        case leagueName = "league_name"         // Map to JSON key
         case eventLive = "event_live"
         case eventHomeTeamLogo = "event_home_team_logo"
         case eventAwayTeamLogo = "event_away_team_logo"

@@ -7,7 +7,18 @@
 
 import UIKit
 
-class MatchesTableViewController: UITableViewController {
+class MatchesTableViewController: UITableViewController, MatchesViewProtocol {
+ 
+    
+    
+    
+    
+    var sportType: Int = 0
+    var leagueID: Int = 0
+    let presenter = MatchesPresenter()
+    var upcomingMatches : [Any] = []
+    var recentMatches : [Any] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +29,10 @@ class MatchesTableViewController: UITableViewController {
         backgroundImage.image = UIImage(named: "wbackground")
         backgroundImage.contentMode = .scaleAspectFill
         tableView.backgroundView = backgroundImage
+        presenter.vc=self
 
+        fetchMatches()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -36,7 +50,7 @@ class MatchesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
-        return section == 1 ? 10 : 1
+        return section == 1 ? recentMatches.count : 1
     }
     
     
@@ -44,16 +58,53 @@ class MatchesTableViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingMatchesTableCell", for: indexPath) as! UpComingTableViewCell
+            guard !upcomingMatches.isEmpty else { return cell }
+            
+            if let footballMatch = upcomingMatches as? [FMatch] {
+                print("cell \n \(footballMatch)")
+                cell.matches = footballMatch
+                cell.sportsType = .football
+            } else if let basketballMatch = upcomingMatches as? [BFixtureContainer] {
+                cell.matches = basketballMatch
+                cell.sportsType = .basketball
+
+            }
+            
+            else if let tennisMatch = upcomingMatches as? [TMatch] {
+                cell.matches = tennisMatch
+                cell.sportsType = .tennis
+
+            }
+            else if let cricketMatch = upcomingMatches as? [CMatch] {
+                cell.matches = cricketMatch
+                cell.sportsType = .cricket
+
+            }
+            cell.reloading()
             return cell
-        case 1 :
+        case 1: 
             let cell = tableView.dequeueReusableCell(withIdentifier: "recentMatchesTableCell", for: indexPath) as! RecentTableViewCell
-            cell.awayTeamLogo.image = UIImage(named: "footballonbording")
-            cell.homeTeamLogo.image = UIImage(named: "footballonbording")
-            cell.score.text = "1-1"
-            cell.dateLabel.text = "12/12/2020"
-            cell.timeLabel.text = "12:00"
-            cell.homeTeamName.text = "Team A"
-            cell.awayTeamName.text = "Team B"
+            let match = recentMatches[indexPath.row]
+            
+            switch MySportType(intValue: sportType) {
+            case .football:
+                if let match = match as? FMatch {
+                    cell.configureWithFootballMatch(match: match)
+                }
+            case .basketball:
+                if let match = match as? BFixtureContainer {
+                    cell.configureWithBasketballMatch(match: match)
+                }
+            case .tennis:
+                if let match = match as? TMatch {
+                    cell.configureWithTennisMatch(match: match)
+                }
+            case .cricket:
+                if let match = match as? CMatch {
+                    cell.configureWithCricketMatch(match: match)
+                }
+            default: break
+            }
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "matchesTableViewCell", for: indexPath) as! MatchesTeamsTableViewCell
@@ -80,7 +131,7 @@ class MatchesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = .systemGroupedBackground
-
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -95,7 +146,7 @@ class MatchesTableViewController: UITableViewController {
         default:
             label.text = ""
         }
-
+        
         headerView.addSubview(label)
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
@@ -107,8 +158,40 @@ class MatchesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
+    
+    func fetchMatches() {
+        guard  let mySportType = MySportType(intValue: sportType) else {
+            showError("Invalid sport type")
+            return
+        }
+        let baseURL: String
+        switch mySportType {
+        case .football: baseURL = "https://apiv2.allsportsapi.com/football"
+        case .basketball: baseURL = "https://apiv2.allsportsapi.com/basketball"
+        case .tennis: baseURL = "https://apiv2.allsportsapi.com/tennis"
+        case .cricket: baseURL = "https://apiv2.allsportsapi.com/cricket"
+        }
+        let parameters: [String: Any] = ["met": "Fixtures","leagueId":"\(leagueID)"]
+        presenter.fetchMatches(
+            url: baseURL,
+            parameters: parameters,
+            sportType: mySportType)
+        presenter.fetchRecentMatches(url: baseURL, parameters: parameters, sportType: mySportType)
+    }
 
-
+    
+    func displayMatches(_ matches: [Any]) {
+        self.upcomingMatches = matches
+        tableView.reloadData()
+        
+    }
+    func displayRecentMatches(_ matches: [Any]) {
+        self.recentMatches = matches
+        tableView.reloadData()
+    }
+    
+    
+    
     
     /*
      // Override to support conditional editing of the table view.
@@ -154,5 +237,15 @@ class MatchesTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    func showError(_ message: String) {
+        let alert = UIAlertController(
+            title: "Error",
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+        
+    }
     
 }

@@ -16,21 +16,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zm-Aa-fmz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zm-Aa-fmz">
                                 <rect key="frame" x="67" y="118" width="267" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" systemColor="tintColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ors-6s-KhV">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ors-6s-KhV">
                                 <rect key="frame" x="35" y="210" width="330" height="505"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ors-6s-KhV" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.839695" id="5aV-4o-hhl"/>
+                            <constraint firstItem="4Zm-Aa-fmz" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="HnI-Ot-nk7"/>
+                            <constraint firstItem="4Zm-Aa-fmz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="67" id="bh5-0E-Ven"/>
+                            <constraint firstItem="Ors-6s-KhV" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.592723" id="bya-yJ-IhK"/>
+                            <constraint firstItem="4Zm-Aa-fmz" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.0539906" id="hC0-ql-y05"/>
+                            <constraint firstItem="Ors-6s-KhV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="35" id="ujs-iX-Uzq"/>
+                            <constraint firstItem="Ors-6s-KhV" firstAttribute="top" secondItem="4Zm-Aa-fmz" secondAttribute="bottom" constant="46" id="wiM-3E-tz5"/>
+                            <constraint firstItem="4Zm-Aa-fmz" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.679389" id="ytR-kc-AIg"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="leagueLabel" destination="4Zm-Aa-fmz" id="YPP-js-N4i"/>

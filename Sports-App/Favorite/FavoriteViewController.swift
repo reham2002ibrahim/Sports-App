@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Reachability
+
 private let reuseIdentifier = "cell"
 
 class FavoriteViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
@@ -13,6 +15,7 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
     @IBOutlet weak var mySegment: UISegmentedControl!
 
     @IBOutlet weak var favoriteTable: UITableView!
+    var reachability: Reachability?
     
     override func viewWillAppear(_ animated: Bool) {
         mySegment.selectedSegmentIndex = 0
@@ -25,11 +28,14 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
         favoriteTable.delegate = self
         favoriteTable.dataSource = self
         favoriteTableStyle()
-        
+        do {
+            reachability = try Reachability()
+            try reachability?.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
         mySegment.selectedSegmentIndex = 0
 
-//        CoreDataService.shared.addLeague(to: "FootballTable", id: 1, name: "Premier League", img: "premier.png")
- 
         let nib = UINib(nibName: "CustomFavTableViewCell", bundle: nil)
         self.favoriteTable!
             .register(nib, forCellReuseIdentifier: reuseIdentifier)
@@ -124,19 +130,30 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
         }
     }
     
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let tableName = entityNameForSelectedSegment()
-        let leagues = CoreDataService.shared.getAllLeagues(from: tableName)
-        guard indexPath.row < leagues.count else { return }
-        let league = leagues[indexPath.row]
-        
-        guard let leagueId = league.value(forKey: "leagueId") as? Int else { return }
-        
-        // navigate here
-        
-    
+        if let reachability = reachability, reachability.connection != .unavailable {
+            let storyboard = UIStoryboard(name: "Matches", bundle: nil)
+            if let matchVC = storyboard.instantiateViewController(withIdentifier: "matchesTableViewController") as? MatchesTableViewController {
+                let tableName = entityNameForSelectedSegment()
+                   let leagues = CoreDataService.shared.getAllLeagues(from: tableName)
+                   guard indexPath.row < leagues.count else { return }
+                   let league = leagues[indexPath.row]
+           
+                   guard let leagueId = league.value(forKey: "leagueId") as? Int else { return }
+           
+           //     matchVC.leagueId = leagueId
+              //  matchVC.sportType = tableName
+                
+                navigationController?.pushViewController(matchVC, animated: true)
+            }
+        } else {
+            let alert = UIAlertController(title: "No Internet", message: "Please check your internet connection.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
     }
     func favoriteTableStyle() {
         favoriteTable.layer.cornerRadius = 25
