@@ -5,6 +5,7 @@
 //  Created by MAC on 17/05/2025.
 //
 import Foundation
+import UIView_Shimmer
 
 protocol LeaguesViewProtocol: AnyObject {
     func displayLeagues(_ leagues: [Any])
@@ -63,61 +64,3 @@ enum MySportType {
     case tennis
     case cricket
 }
-//
-//
-//protocol LeaguesViewProtocol: AnyObject {
-//    func displayLeagues(_ leagues: [Any])
-//    func showError(_ message: String)
-//}
-//
-//
-//class LeaguesPresenter {
-//    weak var vc : LeaguesViewProtocol!
-//   
-//    func attachView(MyController: LeaguesViewProtocol) {
-//        vc = MyController
-//    }
-//
-//    func fetchLeagues(
-//        url : String ,
-//        parameters : [String: Any] ,
-//        sportType : Int
-//    ) {
-//        let res : Any?
-//        if sportType == 0 {res = FLeagueResponse.self }
-//        else if sportType == 1 {res = BLeagueResponse}
-//        else if sportType == 2 {res = TLeagueResponse}
-//        else if sportType == 3 {res = CLeagueResponse}
-//
-//        NetworkService.fetchData(
-//            url: url,
-//            parameters: parameters,
-//            responseType: res
-//        ){ [weak self] result in
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success(let data):
-//                    self?.vc.displayLeagues(data.result)
-//                case .failure(let error):
-//                    self?.vc.showError(error.localizedDescription)
-//                }
-//            }
-//        }
-//    }
-//}
-
-
-//func fetchLeagues(for sport: SportType) {
-//    let url = sport.url
-//
-//    NetworkService.fetchData(urlString: url, responseType: FLeagueResponse.self) { [weak self] result in
-//        DispatchQueue.main.async {
-//            switch result {
-//            case .success(let data):
-//                self?.vc.displayLeagues(data.result)
-//            case .failure(let error):
-//                self?.vc.showError(error.localizedDescription)
-//            }
-//        }
-//    }
-//}
