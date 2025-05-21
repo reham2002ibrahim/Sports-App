@@ -9,9 +9,11 @@ import UIKit
 import UIView_Shimmer
 
 class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource , LeaguesViewProtocol{
+
    
     var isLoading = true
     let shimmerCount = 6
+
     
     @IBOutlet weak var leaguesTable: UITableView!
     
@@ -23,11 +25,10 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var sportType : Int?
     var navController = UINavigationController()
     var leagues : [Any] = []
-
     let presenter = LeaguesPresenter()
-
- 
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         leaguesTable.dataSource = self
@@ -40,9 +41,11 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
         fetchLeagues()
         leaguesTableStyle()
         //leaguesTable.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+
       //  leaguesTable.contentInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
+
     }
-     func setupUI() {
+    func setupUI() {
         switch sportType {
         case 0 :
             leagueLabel.text = "Football Leagues"
@@ -52,75 +55,59 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
             leagueLabel.text = "Tennis Leagues"
         case 3 :
             leagueLabel.text = "Cricket Leagues"
-        case .none:
-            leagueLabel.text = "Cricket Leagues"
-
-        case .some(_):
-            leagueLabel.text = "Cricket Leagues"
+            
+        default: leagueLabel.text = ""
+            
         }
     }
     func fetchLeagues() {
-          presenter.attachView(self)
-
-          guard let sportTypeInt = sportType,
-                let mySportType = MySportType(intValue: sportTypeInt) else {
-              showError("Invalid sport type")
-              return
-          }
-
-          let baseURL: String
-          switch mySportType {
-          case .football: baseURL = "https://apiv2.allsportsapi.com/football"
-          case .basketball: baseURL = "https://apiv2.allsportsapi.com/basketball"
-          case .tennis: baseURL = "https://apiv2.allsportsapi.com/tennis"
-          case .cricket: baseURL = "https://apiv2.allsportsapi.com/cricket"
-          }
-          let parameters: [String: Any] = ["met": "Leagues"]
-
-          presenter.fetchLeagues(
-              url: baseURL,
-              parameters: parameters,
-              sportType: mySportType
-          )
-      }
+        presenter.attachView(self)
+        
+        guard let sportTypeInt = sportType,
+              let mySportType = MySportType(intValue: sportTypeInt) else {
+            showError("Invalid sport type")
+            return
+        }
+        
+        let baseURL: String
+        switch mySportType {
+        case .football: baseURL = "https://apiv2.allsportsapi.com/football"
+        case .basketball: baseURL = "https://apiv2.allsportsapi.com/basketball"
+        case .tennis: baseURL = "https://apiv2.allsportsapi.com/tennis"
+        case .cricket: baseURL = "https://apiv2.allsportsapi.com/cricket"
+        }
+        let parameters: [String: Any] = ["met": "Leagues"]
+        
+        presenter.fetchLeagues(
+            url: baseURL,
+            parameters: parameters,
+            sportType: mySportType
+        )
+    }
     
     
     func displayLeagues(_ leagues: [Any]) {
+
+        self.leagues = leagues
+        leaguesTable.reloadData()
+    }
+    
+
          self.leagues = leagues
         self.isLoading = false
         leaguesTable.reloadData()
     }
 
 
+
     func showError(_ message: String) {
         let alert = UIAlertController(
-                 title: "Error",
-                 message: message,
-                 preferredStyle: .alert
-             )
-             alert.addAction(UIAlertAction(title: "OK", style: .default))
-             present(alert, animated: true)
-        let url = "https://apiv2.allsportsapi.com/football/"
-        let parameters: [String: Any] = [
-            "met": "Leagues"
-        ]
-
-        NetworkService.fetchData(
-            url: url,
-            parameters: parameters,
-            responseType: FLeagueResponse.self
-        ) { result in
-            switch result {
-            case .success(let response):
-                print("Fetched \(response.result.count) leagues")
-                for league in response.result {
-                    print("League: \(league.leagueName), Country: \(league.countryName ?? "N/A")")
-                }
-            case .failure(let error):
-                print("Failed to fetch leagues: \(error.localizedDescription)")
-            }
-        }
-
+            title: "Error",
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
 
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -140,6 +127,34 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "leaguesCell", for: indexPath) as! LeaguesCellTableViewCell
 
+        
+        let league = leagues[indexPath.row]
+        var name: String = ""
+        var logo: String? = nil
+        
+        
+        if let footballLeague = league as? FLeague {
+            name = footballLeague.leagueName
+            logo = footballLeague.leagueLogo
+        } else if let basketballLeague = league as? BLeague {
+            name = basketballLeague.leagueName
+            logo = "hbhbhbv"
+        }
+        
+        else if let tennisLeague = league as? TCountry {
+            name = tennisLeague.countryName
+            logo = "tennisLeague.leagueLogo"
+        }
+        else if let cricketLeague = league as? CLeague {
+            name = cricketLeague.leagueName
+            logo = cricketLeague.leagueYear
+        }
+        
+        cell.configure(with: name, imageUrl: logo)
+        
+        cell.onFavTapped = {
+
+
         if isLoading {
             cell.setTemplateWithSubviews(true, viewBackgroundColor: .systemBackground)
             cell.leagueTitle.text = ""
@@ -151,6 +166,7 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
             let league = leagues[indexPath.row]
             var name: String = ""
             var logo: String? = nil
+
             var tableName = ""
             var id: Int = 0
 
@@ -174,6 +190,10 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 logo = cricketLeague.leagueYear
                 tableName = "CricketTable"
                 id = cricketLeague.leagueKey
+
+                name = cricketLeague.leagueName
+                img = ""
+
             }
 
             cell.renderCell(with: name, imageUrl: logo)
@@ -199,22 +219,41 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Matches", bundle: nil)
         let matchesVC = storyboard.instantiateViewController(withIdentifier: "matchesTableViewController") as! MatchesTableViewController
-        self.navigationController?.pushViewController(matchesVC, animated: true) 
+        self.navigationController?.pushViewController(matchesVC, animated: true)
+        let league = leagues[indexPath.row]
+        
+        if let footballLeague = league as? FLeague {
+            matchesVC.leagueID = footballLeague.leagueKey
+            matchesVC.sportType = self.sportType ?? 0
+            print("Sport Type: \( String(describing: self.sportType)), League ID: \(footballLeague.leagueKey)")
+
+        } else if let basketballLeague = league as? BLeague {
+            matchesVC.leagueID = basketballLeague.leagueKey
+            matchesVC.sportType = self.sportType ?? 0
+        } else if let tennisLeague = league as? TCountry {
+            matchesVC.leagueID = tennisLeague.countryKey
+            matchesVC.sportType = self.sportType ?? 0
+
+        } else if let cricketLeague = league as? CLeague {
+            matchesVC.leagueID = cricketLeague.leagueKey
+            matchesVC.sportType = self.sportType ?? 0
+        }
+        
     }
     
     
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-       func leaguesTableStyle() {
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    func leaguesTableStyle() {
         leaguesTable.layer.cornerRadius = 25
         leaguesTable.layer.masksToBounds = false
         leaguesTable.layer.shadowColor = UIColor.systemBlue.withAlphaComponent(0.5).cgColor
@@ -226,6 +265,16 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
 
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let inset: CGFloat = 16
+        let frame = cell.frame
+        let newFrame = CGRect(x: frame.origin.x + inset, y: frame.origin.y, width: frame.size.width - 2*inset, height: frame.size.height - 8)
+        cell.frame = newFrame
+        cell.contentView.frame = newFrame
+        cell.contentView.layer.cornerRadius = 20
+        cell.contentView.layer.masksToBounds = true
+    }
+    
 
 }
 
@@ -242,6 +291,6 @@ extension MySportType {
     
     
     
-  
+    
 }
 
