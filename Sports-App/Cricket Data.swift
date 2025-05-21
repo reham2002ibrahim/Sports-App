@@ -43,8 +43,22 @@ struct CMatch: Codable {
     let eventAwayFinalResult: String
     let eventStatus: String
     let eventLive: String
-    let eventHomeTeamLogo: String
-    let eventAwayTeamLogo: String
+    let eventHomeTeamLogo: String?
+    let eventAwayTeamLogo: String?
+    
+    enum CodingKeys: String, CodingKey {
+           case eventKey = "event_key"
+           case eventDateStart = "event_date_start"
+           case eventTime = "event_time"
+           case eventHomeTeam = "event_home_team"
+           case eventAwayTeam = "event_away_team"
+           case eventHomeFinalResult = "event_home_final_result"
+           case eventAwayFinalResult = "event_away_final_result"
+           case eventStatus = "event_status"
+           case eventLive = "event_live"
+           case eventHomeTeamLogo = "event_home_team_logo"
+           case eventAwayTeamLogo = "event_away_team_logo"
+       }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////

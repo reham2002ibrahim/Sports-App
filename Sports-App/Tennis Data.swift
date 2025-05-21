@@ -39,4 +39,16 @@ struct TMatch: Codable {
     let leagueKey: Int
     let eventFirstPlayerLogo: String?
     let eventSecondPlayerLogo: String?
+    enum CodingKeys: String, CodingKey {
+            case eventKey = "event_key"
+            case eventDate = "event_date"
+            case eventTime = "event_time"
+            case eventFirstPlayer = "event_first_player"
+            case eventSecondPlayer = "event_second_player"
+            case eventFinalResult = "event_final_result"
+            case eventStatus = "event_status"
+            case leagueKey = "league_key"
+            case eventFirstPlayerLogo = "event_first_player_logo"
+            case eventSecondPlayerLogo = "event_second_player_logo"
+        }
 }
