@@ -93,6 +93,28 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
              )
              alert.addAction(UIAlertAction(title: "OK", style: .default))
              present(alert, animated: true)
+        let url = "https://apiv2.allsportsapi.com/football/"
+        let parameters: [String: Any] = [
+            "met": "Leagues"
+        ]
+
+        NetworkService.fetchData(
+            url: url,
+            parameters: parameters,
+            responseType: FLeagueResponse.self
+        ) { result in
+            switch result {
+            case .success(let response):
+                print("Fetched \(response.result.count) leagues")
+                for league in response.result {
+                    print("League: \(league.leagueName), Country: \(league.countryName ?? "N/A")")
+                }
+            case .failure(let error):
+                print("Failed to fetch leagues: \(error.localizedDescription)")
+            }
+        }
+
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -161,6 +183,11 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Matches", bundle: nil)
+        let matchesVC = storyboard.instantiateViewController(withIdentifier: "matchesTableViewController") as! MatchesTableViewController
+        self.navigationController?.pushViewController(matchesVC, animated: true) 
     }
     
     

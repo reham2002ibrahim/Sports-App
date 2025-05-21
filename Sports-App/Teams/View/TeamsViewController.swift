@@ -128,7 +128,6 @@ class TeamsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         teamTable.clipsToBounds = false
     }
 }
-
 ////
 ////  TeamsViewController.swift
 ////  Sports-App
@@ -149,6 +148,14 @@ class TeamsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //      var selectedTeamName: String?
 //        
 //    @IBOutlet weak var teamName: UILabel!
+
+//
+//    var players: [FPlayer] = []
+//      var presenter = PlayersPresenter()
+//      var teamId: Int = 96
+//    
+//        
+//    @IBOutlet weak var teamName: UIView!
 //    @IBOutlet weak var teamImg: UIImageView!
 //    
 //    @IBOutlet weak var teamTable: UITableView!
@@ -176,6 +183,9 @@ class TeamsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //                 }
 //             }.resume()
 //         }
+//        presenter.fetchPlayers(for: teamId)
+//        
+//        teamTableStyle()
 //        teamImg.layer.cornerRadius = 25
 //
 //    }
@@ -197,6 +207,19 @@ class TeamsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //             alert.addAction(UIAlertAction(title: "OK", style: .default))
 //             present(alert, animated: true)
 //    }
+//    
+//    func displayPlayers(_ players: [FPlayer]) {
+//          self.players = players
+//          DispatchQueue.main.async {
+//              self.teamTable.reloadData()
+//          }
+//      }
+//
+//
+//    func showError(_ message: String) {
+//        print("Error loading players: \(message)")
+//    }
+//    
 //    
 //    func numberOfSections(in tableView: UITableView) -> Int {
 //           // #warning Incomplete implementation, return the number of sections
@@ -273,6 +296,29 @@ class TeamsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 ////
 ////        return cell
 ////    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamsTableViewCell
+//        let player = players[indexPath.row]
+//
+//        cell.playerName.text = player.playerName
+//        cell.playerTshirt.text = player.playerNumber
+//
+//        if let url = URL(string: player.playerImage ?? "myBackground") {
+//            DispatchQueue.global().async {
+//                if let data = try? Data(contentsOf: url) {
+//                    DispatchQueue.main.async {
+//                        cell.playerImg.image = UIImage(data: data)
+//                    }
+//                }
+//            }
+//        }
+//
+//        cell.contentView.layer.borderWidth = 0.5
+//        cell.contentView.layer.borderColor = UIColor.link.cgColor
+//
+//        return cell
+//    }
 //
 //    
 //    func teamTableStyle() {
