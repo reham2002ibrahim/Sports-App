@@ -79,7 +79,7 @@ struct CTeam: Codable {
 struct CPlayer: Codable {
     let playerKey: Int
     let playerName: String
-    let playerImage: String
+    let playerImage: String?
     let playerNumber: String
     
     enum CodingKeys: String, CodingKey {

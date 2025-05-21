@@ -84,7 +84,7 @@
                     <navigationItem key="navigationItem" id="mpW-UM-IZa"/>
                     <connections>
                         <outlet property="teamImg" destination="p2L-H5-4W6" id="UGl-Of-qrx"/>
-                        <outlet property="teamName" destination="US3-x8-ZhH" id="lRG-bP-N1P"/>
+                        <outlet property="teamName" destination="0Le-bg-vP9" id="GqH-ZB-uwf"/>
                         <outlet property="teamTable" destination="JVO-Um-zhX" id="0bM-WN-SfU"/>
                     </connections>
                 </viewController>
