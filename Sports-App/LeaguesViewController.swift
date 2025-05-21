@@ -7,22 +7,92 @@
 
 import UIKit
 
-class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource , LeaguesViewProtocol{
+   
+
     
     @IBOutlet weak var leaguesTable: UITableView!
     
+    @IBOutlet weak var leagueLabel: UILabel!
+    
+    
     let nib = UINib(nibName: "LeaguesCellTableViewCell", bundle: nil)
-    var leaguesArray:[String] = ["dd","ss","uvigswvigerigh","","ddddddddddddddddddddddddddddddddddddddddddd"]
     
     var sportType : Int?
     var navController = UINavigationController()
-    
+    var leagues : [Any] = []
+
+    let presenter = LeaguesPresenter()
+
+ 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         leaguesTable.dataSource = self
         leaguesTable.delegate = self
         self.leaguesTable.register(nib, forCellReuseIdentifier: "leaguesCell")
+        setupUI()
+        fetchLeagues()
+        leaguesTableStyle()
+        //leaguesTable.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+     
+    }
+     func setupUI() {
+        switch sportType {
+        case 0 :
+            leagueLabel.text = "Football Leagues"
+        case 1 :
+            leagueLabel.text = "Basketball Leagues"
+        case 2 :
+            leagueLabel.text = "Tennis Leagues"
+        case 3 :
+            leagueLabel.text = "Cricket Leagues"
+        case .none:
+            leagueLabel.text = "Cricket Leagues"
+
+        case .some(_):
+            leagueLabel.text = "Cricket Leagues"
+        }
+    }
+    func fetchLeagues() {
+          presenter.attachView(self)
+
+          guard let sportTypeInt = sportType,
+                let mySportType = MySportType(intValue: sportTypeInt) else {
+              showError("Invalid sport type")
+              return
+          }
+
+          let baseURL: String
+          switch mySportType {
+          case .football: baseURL = "https://apiv2.allsportsapi.com/football"
+          case .basketball: baseURL = "https://apiv2.allsportsapi.com/basketball"
+          case .tennis: baseURL = "https://apiv2.allsportsapi.com/tennis"
+          case .cricket: baseURL = "https://apiv2.allsportsapi.com/cricket"
+          }
+          let parameters: [String: Any] = ["met": "Leagues"]
+
+          presenter.fetchLeagues(
+              url: baseURL,
+              parameters: parameters,
+              sportType: mySportType
+          )
+      }
+    
+    
+    func displayLeagues(_ leagues: [Any]) {
+         self.leagues = leagues
+        leaguesTable.reloadData()
+    }
+
+    func showError(_ message: String) {
+        let alert = UIAlertController(
+                 title: "Error",
+                 message: message,
+                 preferredStyle: .alert
+             )
+             alert.addAction(UIAlertAction(title: "OK", style: .default))
+             present(alert, animated: true)
         let url = "https://apiv2.allsportsapi.com/football/"
         let parameters: [String: Any] = [
             "met": "Leagues"
@@ -44,25 +114,83 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
             }
         }
 
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return leaguesArray.count
+        return leagues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "leaguesCell", for: indexPath) as! LeaguesCellTableViewCell
-        cell.leagueTitle.text = leaguesArray[indexPath.row]
+
+        let league = leagues[indexPath.row]
+        var name: String = ""
+        var logo: String? = nil
+
+
+        if let footballLeague = league as? FLeague {
+            name = footballLeague.leagueName
+            logo = footballLeague.leagueLogo
+        } else if let basketballLeague = league as? BLeague {
+            name = basketballLeague.leagueName
+            logo = "hbhbhbv"
+        }
+        
+        else if let tennisLeague = league as? TCountry {
+            name = tennisLeague.countryName
+            logo = "tennisLeague.leagueLogo"
+        }
+            else if let cricketLeague = league as? CLeague {
+            name = cricketLeague.leagueName
+            logo = cricketLeague.leagueYear
+        }
+
+        cell.configure(with: name, imageUrl: logo)
+        
+        cell.onFavTapped = {
+            var tableName = ""
+            var id: Int = 0
+            var name: String = ""
+            var img: String = ""
+            
+            if let footballLeague = league as? FLeague {
+                tableName = "FootballTable"
+                id = footballLeague.leagueKey
+                name = footballLeague.leagueName
+                img = footballLeague.leagueLogo ?? ""
+            } else if let basketballLeague = league as? BLeague {
+                tableName = "BasketballTable"
+                id = basketballLeague.leagueKey
+                name = basketballLeague.leagueName
+                img = ""
+            } else if let tennisLeague = league as? TCountry {
+                tableName = "TennisTable"
+                id = tennisLeague.countryKey
+                name = tennisLeague.countryName
+                img = ""
+            } else if let cricketLeague = league as? CLeague {
+                tableName = "CricketTable"
+                id = cricketLeague.leagueKey
+                name = cricketLeague.leagueName
+                img = "" 
+            }
+            
+            CoreDataService.shared.addLeague(to: tableName, id: id, name: name, img: img)
+            cell.favBtn.tintColor = .systemPink
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 100
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Matches", bundle: nil)
         let matchesVC = storyboard.instantiateViewController(withIdentifier: "matchesTableViewController") as! MatchesTableViewController
         self.navigationController?.pushViewController(matchesVC, animated: true) 
     }
+    
+    
     
 
     /*
@@ -74,5 +202,42 @@ class LeaguesViewController: UIViewController,UITableViewDelegate,UITableViewDat
         // Pass the selected object to the new view controller.
     }
     */
+       func leaguesTableStyle() {
+        leaguesTable.layer.cornerRadius = 25
+        leaguesTable.layer.masksToBounds = false
+        leaguesTable.layer.shadowColor = UIColor.systemBlue.withAlphaComponent(0.5).cgColor
+        leaguesTable.layer.shadowOffset = CGSize(width: 0, height: 0)
+        leaguesTable.layer.shadowOpacity = 0.75
+        leaguesTable.layer.shadowRadius = 14
+        leaguesTable.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        leaguesTable.clipsToBounds = false
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let inset: CGFloat = 16
+        let frame = cell.frame
+        let newFrame = CGRect(x: frame.origin.x + inset, y: frame.origin.y, width: frame.size.width - 2*inset, height: frame.size.height - 8)
+        cell.frame = newFrame
+        cell.contentView.frame = newFrame
+        cell.contentView.layer.cornerRadius = 20
+        cell.contentView.layer.masksToBounds = true
+    }
 
 }
+
+extension MySportType {
+    init?(intValue: Int) {
+        switch intValue {
+        case 0: self = .football
+        case 1: self = .basketball
+        case 2: self = .tennis
+        case 3: self = .cricket
+        default: return nil
+        }
+    }
+    
+    
+    
+  
+}
+

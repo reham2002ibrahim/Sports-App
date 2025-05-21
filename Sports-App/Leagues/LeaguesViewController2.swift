@@ -1,10 +1,10 @@
-////
-////  LeaguesViewCViewController.swift
-////  Sports-App
-////
-////  Created by MAC on 17/05/2025.
-////
 //
+//  LeaguesViewCViewController.swift
+//  Sports-App
+//
+//  Created by MAC on 17/05/2025.
+//
+
 //
 //import Foundation
 //import UIKit
