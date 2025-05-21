@@ -1,11 +1,4 @@
-////
-////  SportsAPIService.swift
-////  Sports-App
-////
-////  Created by MAC on 17/05/2025.
-//
-//
-//  Created by MAC on 17/05/2025.
+
 
 
 //import Foundation
@@ -58,6 +51,7 @@
 //            }
 //    }
 //}
+
 import Foundation
 import Alamofire
 
@@ -65,7 +59,6 @@ class NetworkService {
     
     private static let apiKey =
     "48ce930fc50312caeb8b857e26dbd344778fa9cf65b1562c4284b9f3f6f4e1e5"
-   // "8526db2c8daaf7d2d61118d6f06f42aacb0ca62930f94b6c94bf9d5692fbd2cf"
     
     
     static func fetchData<T: Decodable>(
@@ -99,5 +92,3 @@ class NetworkService {
             }
     }
 }
-
-
