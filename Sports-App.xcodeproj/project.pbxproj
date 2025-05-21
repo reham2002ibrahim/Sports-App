@@ -141,12 +141,9 @@
 			packageProductDependencies = (
 				D260AE592DD2376D00286866 /* Lottie */,
 				0455AC832DD9181A00D675BE /* Alamofire */,
-
 				D2900DB72DDE29C900A84547 /* Kingfisher */,
-
 				04797B092DDE108200555E61 /* Reachability */,
 				04797B0C2DDE264C00555E61 /* UIView-Shimmer */,
-
 			);
 			productName = "Sports-App";
 			productReference = 04BB97BB2DD136E6003A443A /* Sports-App.app */;
@@ -183,12 +180,9 @@
 			packageReferences = (
 				D260AE582DD2376D00286866 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				0455AC822DD9181A00D675BE /* XCRemoteSwiftPackageReference "Alamofire" */,
-
 				D2900DB62DDE29C900A84547 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-
 				04797B082DDE108200555E61 /* XCRemoteSwiftPackageReference "Reachability" */,
 				04797B0B2DDE264C00555E61 /* XCRemoteSwiftPackageReference "UIView-Shimmer" */,
-
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 04BB97BC2DD136E6003A443A /* Products */;
