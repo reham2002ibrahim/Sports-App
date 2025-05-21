@@ -1,10 +1,34 @@
+////
+////  SportsAPIService.swift
+////  Sports-App
+////
+////  Created by MAC on 17/05/2025.
 //
-//  SportsAPIService.swift
-//  Sports-App
 //
-//  Created by MAC on 17/05/2025.
-
-
+//import Foundation
+//import Alamofire
+//
+//class NetworkService {
+//    
+//    private static let apiKey = "8526db2c8daaf7d2d61118d6f06f42aacb0ca62930f94b6c94bf9d5692fbd2cf"
+//    
+//    static func fetchData<T: Decodable>(
+//        urlString: String,
+//        responseType: T.Type,
+//        completion: @escaping (Result<T, Error>) -> Void
+//    ) {
+//        AF.request(urlString)
+//            .validate()
+//            .responseDecodable(of: T.self) { response in
+//                switch response.result {
+//                case .success(let decodedResponse):
+//                    completion(.success(decodedResponse))
+//                case .failure(let error):
+//                    completion(.failure(error))
+//                }
+//            }
+//    }
+//}
 import Foundation
 import Alamofire
 
@@ -12,12 +36,17 @@ class NetworkService {
     
     private static let apiKey = "8526db2c8daaf7d2d61118d6f06f42aacb0ca62930f94b6c94bf9d5692fbd2cf"
     
+    
     static func fetchData<T: Decodable>(
-        urlString: String,
+        url: String,
+        parameters: [String: Any]? = nil,
         responseType: T.Type,
         completion: @escaping (Result<T, Error>) -> Void
     ) {
-        AF.request(urlString)
+        var allParams = parameters ?? [:]
+        allParams["apikey"] = apiKey
+
+        AF.request(url, parameters: allParams)
             .validate()
             .responseDecodable(of: T.self) { response in
                 switch response.result {
@@ -29,4 +58,5 @@ class NetworkService {
             }
     }
 }
+
 
