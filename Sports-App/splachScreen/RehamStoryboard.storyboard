@@ -72,18 +72,27 @@
                                     <action selector="segmentChanged:" destination="01D-sL-F57" eventType="valueChanged" id="npB-IE-jSq"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WJ3-yd-F5B">
-                                <rect key="frame" x="33" y="265" width="336" height="452"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gh1-W4-zzF">
+                                <rect key="frame" x="34" y="104" width="74" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Teams">
+                                    <color key="baseBackgroundColor" red="0.0" green="0.0057350669160000003" blue="0.59407467309999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="teamBtn:" destination="01D-sL-F57" eventType="touchUpInside" id="Jmz-bW-Dy3"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WJ3-yd-F5B">
+                                <rect key="frame" x="16" y="262" width="370" height="462"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="452" id="kqO-BD-JR4"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="zsQ-pG-pwr" customClass="CustomFavTableViewCell" customModule="Sports_App" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="336" height="47.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="370" height="47.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zsQ-pG-pwr" id="edV-Bd-upL">
-                                            <rect key="frame" x="0.0" y="0.0" width="336" height="47.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="47.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -102,15 +111,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="KKj-2x-DKg" firstAttribute="top" secondItem="o2V-pI-9hi" secondAttribute="top" constant="21" id="0Wc-xa-kya"/>
-                            <constraint firstItem="o2V-pI-9hi" firstAttribute="trailing" secondItem="WJ3-yd-F5B" secondAttribute="trailing" constant="33" id="3Ww-xp-dhZ"/>
                             <constraint firstItem="PCs-x1-ZIw" firstAttribute="centerX" secondItem="KKj-2x-DKg" secondAttribute="centerX" id="870-hC-nCC"/>
-                            <constraint firstItem="o2V-pI-9hi" firstAttribute="bottom" secondItem="WJ3-yd-F5B" secondAttribute="bottom" constant="40" id="Hz2-Y7-FXq"/>
                             <constraint firstItem="PCs-x1-ZIw" firstAttribute="top" secondItem="KKj-2x-DKg" secondAttribute="bottom" constant="43" id="KqC-jZ-tKZ"/>
-                            <constraint firstItem="WJ3-yd-F5B" firstAttribute="leading" secondItem="o2V-pI-9hi" secondAttribute="leading" constant="33" id="P7C-iy-BRa"/>
                             <constraint firstItem="KKj-2x-DKg" firstAttribute="width" secondItem="0Ki-AM-alX" secondAttribute="width" multiplier="0.268657" id="QTh-V9-VrD"/>
                             <constraint firstItem="PCs-x1-ZIw" firstAttribute="height" secondItem="KKj-2x-DKg" secondAttribute="height" multiplier="0.885714" id="lZC-pc-PLf"/>
                             <constraint firstItem="KKj-2x-DKg" firstAttribute="height" secondItem="o2V-pI-9hi" secondAttribute="height" multiplier="0.0400458" id="rWO-PG-Pia"/>
-                            <constraint firstItem="WJ3-yd-F5B" firstAttribute="top" secondItem="o2V-pI-9hi" secondAttribute="top" constant="141" id="tlX-Vx-UDg"/>
                             <constraint firstItem="PCs-x1-ZIw" firstAttribute="width" secondItem="KKj-2x-DKg" secondAttribute="width" multiplier="3.10185" id="xYw-tk-56T"/>
                             <constraint firstItem="KKj-2x-DKg" firstAttribute="centerX" secondItem="o2V-pI-9hi" secondAttribute="centerX" id="xd9-Gm-Frf"/>
                         </constraints>
@@ -344,22 +349,22 @@
         <image name="homekit" catalog="system" width="128" height="104"/>
         <image name="tennisonbording" width="1024" height="1536"/>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemCyanColor">
-            <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.1960784314" green="0.67843137249999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tableCellBlueTextColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

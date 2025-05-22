@@ -176,5 +176,24 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
         default: return "FootballTable"
         }
     }
+    
+    
+    @IBAction func teamBtn(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Teams", bundle: nil)
+            
+            guard let teamsVC = storyboard.instantiateViewController(withIdentifier: "TeamsViewController") as? TeamsViewController else {
+                return
+            }
+            
+            teamsVC.teamId = 83
+            teamsVC.sportType = 0
+            teamsVC.selectedTeamLogo = "self.selectedTeamLogo"
+            teamsVC.selectedTeamName = "myFirstTesm"
+            
+         
+            self.navigationController?.pushViewController(teamsVC, animated: true)
+        
+        
+    }
 
 }

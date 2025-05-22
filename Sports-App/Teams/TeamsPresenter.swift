@@ -70,7 +70,12 @@ class PlayersPresenter {
         switch sportType {
         case 0 :
             url = "https://apiv2.allsportsapi.com/football"
-            parameters = ["met": "Teams", "teamId": teamId]
+//            parameters = ["met": "Teams", "teamId": teamId]
+            parameters = [
+                "met": "Teams",
+                "teamId": teamId,
+                "APIkey": apiKey
+            ]
             getPlayers(responseType: FTeamResponse.self, url: url, parameters: parameters)
         case  1 :
             url = "https://apiv2.allsportsapi.com/basketball"
@@ -84,6 +89,14 @@ class PlayersPresenter {
             self.vc.showError("Tennis does not have teams or players.")
             return
         default:
+            url = "https://apiv2.allsportsapi.com/football"
+//            parameters = ["met": "Teams", "teamId": teamId]
+            parameters = [
+                "met": "Teams",
+                "teamId": teamId,
+                "APIkey": apiKey
+            ]
+            getPlayers(responseType: FTeamResponse.self, url: url, parameters: parameters)
             print ("owww")
         }
     }

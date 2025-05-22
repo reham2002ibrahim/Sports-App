@@ -73,17 +73,18 @@ class NetworkService {
         print(url)
         print(allParams)
         var fullURL = URLComponents(string: url)
-        fullURL?.queryItems = allParams.map { URLQueryItem(name: $0.key, value: $0.value as? String) }
+        fullURL?.queryItems = allParams.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+//        fullURL?.queryItems = allParams.map { URLQueryItem(name: $0.key, value: $0.value as? String) }
                 guard let fullURL = fullURL else { return }
         print(fullURL)
         AF.request(fullURL)
             .validate()
             .responseDecodable(of: T.self) { response in
-               
+          
                 switch response.result {
                 case .success(let decodedResponse):
                     completion(.success(decodedResponse))
-                    print("khalid:\n\(decodedResponse)")
+                    //print("khalid:\n\(decodedResponse)")
                 case .failure(let error):
                     print(error.localizedDescription)
 
