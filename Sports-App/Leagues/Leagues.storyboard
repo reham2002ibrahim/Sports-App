@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ors-6s-KhV">
-                                <rect key="frame" x="16" y="189" width="361" height="595"/>
+                                <rect key="frame" x="16" y="189" width="361" height="545"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zm-Aa-fmz">
@@ -30,14 +30,13 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Ors-6s-KhV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="7UH-o9-XpX"/>
                             <constraint firstItem="4Zm-Aa-fmz" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="GUa-lV-jR5"/>
+                            <constraint firstItem="Ors-6s-KhV" firstAttribute="top" secondItem="4Zm-Aa-fmz" secondAttribute="bottom" constant="45" id="Lyq-GE-4RT"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Ors-6s-KhV" secondAttribute="bottom" constant="50" id="YCL-fh-v4B"/>
                             <constraint firstItem="4Zm-Aa-fmz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="105" id="YXh-KK-5M6"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Ors-6s-KhV" secondAttribute="trailing" constant="16" id="aez-xu-KHS"/>
-                            <constraint firstItem="Ors-6s-KhV" firstAttribute="top" secondItem="4Zm-Aa-fmz" secondAttribute="bottom" constant="45" id="iBG-2g-ITL"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4Zm-Aa-fmz" secondAttribute="trailing" constant="103" id="iee-wn-vhp"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Ors-6s-KhV" secondAttribute="bottom" id="jEg-sx-dbB"/>
-                            <constraint firstItem="Ors-6s-KhV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="p6q-TH-oUi"/>
-                            <constraint firstItem="Ors-6s-KhV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="71" id="x0O-f2-FRe"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Ors-6s-KhV" secondAttribute="trailing" constant="16" id="w3p-7a-d0D"/>
                         </constraints>
                     </view>
                     <connections>

@@ -21,6 +21,21 @@ class RecentTableViewCell: UITableViewCell {
         
         backgroundColor = UIColor.white.withAlphaComponent(0.5)
         contentView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        backgroundColor = .clear
+            contentView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
+            
+            // Border
+            contentView.layer.cornerRadius = 16
+            contentView.layer.borderWidth = 1.5
+            contentView.layer.borderColor = UIColor.systemBlue.withAlphaComponent(0.5).cgColor
+            contentView.layer.masksToBounds = true
+
+            // Shadow (on cell, not contentView)
+            layer.shadowColor = UIColor.systemBlue.withAlphaComponent(0.3).cgColor
+            layer.shadowOffset = CGSize(width: 0, height: 4)
+            layer.shadowOpacity = 0.7
+            layer.shadowRadius = 8
+            layer.masksToBounds = false
     }
     
     func configureWithFootballMatch(match: FMatch) {

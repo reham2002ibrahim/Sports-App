@@ -6,12 +6,17 @@
 //
 
 import UIKit
-
-class TeamsTableViewCell: UITableViewCell {
-    @IBOutlet weak var playerImg: UIImageView!
+import UIView_Shimmer
+class TeamsTableViewCell: UITableViewCell, ShimmeringViewProtocol {    @IBOutlet weak var playerImg: UIImageView!
 
     @IBOutlet weak var playerTshirt: UILabel!
     @IBOutlet weak var playerName: UILabel!
+    
+    var shimmeringAnimatedItems: [UIView] {
+         [playerImg, playerTshirt, playerName]
+     }
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,7 +37,6 @@ class TeamsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }

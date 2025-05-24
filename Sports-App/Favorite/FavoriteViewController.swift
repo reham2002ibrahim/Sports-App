@@ -11,6 +11,7 @@ import Reachability
 private let reuseIdentifier = "cell"
 
 class FavoriteViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var emptyStateImageView: UIImageView!
 
     @IBOutlet weak var mySegment: UISegmentedControl!
 
@@ -19,7 +20,10 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         mySegment.selectedSegmentIndex = 0
+        updateEmptyState()
+
         favoriteTable.reloadData()
+        updateEmptyState()
 
 
     }
@@ -27,7 +31,10 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
         super.viewDidLoad()
         favoriteTable.delegate = self
         favoriteTable.dataSource = self
-        favoriteTableStyle()
+      //  favoriteTableStyle()
+//        favoriteTable.layer.borderColor = UIColor.link.cgColor
+//        favoriteTable.layer.borderWidth = 1
+//        favoriteTable.layer.cornerRadius = 8
         do {
             reachability = try Reachability()
             try reachability?.startNotifier()
@@ -40,11 +47,15 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
         self.favoriteTable!
             .register(nib, forCellReuseIdentifier: reuseIdentifier)
         favoriteTable.reloadData()
+        updateEmptyState()
+
 
     }
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         favoriteTable.reloadData()
+        updateEmptyState()
+
     }
 
 
@@ -61,7 +72,7 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height / 4 - 2
+        return tableView.frame.height / 5 - 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -123,10 +134,15 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                     
                      tableView.reloadData()
+                    self?.updateEmptyState()
+
                 }
+
             })
             
             present(alert, animated: true)
+            updateEmptyState()
+
         }
     }
     
@@ -138,21 +154,29 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
             let storyboard = UIStoryboard(name: "Matches", bundle: nil)
             if let matchVC = storyboard.instantiateViewController(withIdentifier: "matchesTableViewController") as? MatchesTableViewController {
                 let tableName = entityNameForSelectedSegment()
-                   let leagues = CoreDataService.shared.getAllLeagues(from: tableName)
-                   guard indexPath.row < leagues.count else { return }
-                   let league = leagues[indexPath.row]
-           
-                   guard let leagueId = league.value(forKey: "leagueId") as? Int else { return }
-           
-           //     matchVC.leagueId = leagueId
-              //  matchVC.sportType = tableName
+                let leagues = CoreDataService.shared.getAllLeagues(from: tableName)
+                guard indexPath.row < leagues.count else { return }
+                let league = leagues[indexPath.row]
+                guard let leagueId = league.value(forKey: "leagueId") as? Int else { return }
+                
+                // matchVC.leagueId = leagueId
+                // matchVC.sportType = tableName
                 
                 navigationController?.pushViewController(matchVC, animated: true)
             }
         } else {
-            let alert = UIAlertController(title: "No Internet", message: "Please check your internet connection.", preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: "No Internet",
+                message: "Please check your internet connection.",
+                preferredStyle: .alert
+            )
             alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
+            present(alert, animated: true) {
+                alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor.white
+                alert.view.layer.borderColor = UIColor.systemBlue.cgColor
+                alert.view.layer.borderWidth = 2
+                alert.view.layer.cornerRadius = 15
+            }
         }
     }
     func favoriteTableStyle() {
@@ -194,6 +218,12 @@ class FavoriteViewController: UIViewController , UITableViewDelegate, UITableVie
             self.navigationController?.pushViewController(teamsVC, animated: true)
         
         
+    }
+    func updateEmptyState() {
+        let tableName = entityNameForSelectedSegment()
+        let hasData = !CoreDataService.shared.getAllLeagues(from: tableName).isEmpty
+        favoriteTable.isHidden = !hasData
+        emptyStateImageView.isHidden = hasData
     }
 
 }

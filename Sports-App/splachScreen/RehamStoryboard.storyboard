@@ -51,8 +51,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favotite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKj-2x-DKg">
-                                <rect key="frame" x="147" y="145" width="108" height="25.333333333333343"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKj-2x-DKg">
+                                <rect key="frame" x="134" y="145" width="121" height="25"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <color key="textColor" systemColor="linkColor"/>
                                 <nil key="highlightedColor"/>
@@ -72,19 +72,8 @@
                                     <action selector="segmentChanged:" destination="01D-sL-F57" eventType="valueChanged" id="npB-IE-jSq"/>
                                 </connections>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gh1-W4-zzF">
-                                <rect key="frame" x="34" y="104" width="74" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Teams">
-                                    <color key="baseBackgroundColor" red="0.0" green="0.0057350669160000003" blue="0.59407467309999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="teamBtn:" destination="01D-sL-F57" eventType="touchUpInside" id="Jmz-bW-Dy3"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WJ3-yd-F5B">
-                                <rect key="frame" x="16" y="262" width="370" height="462"/>
+                                <rect key="frame" x="16" y="262" width="370" height="476"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -106,22 +95,27 @@
                                     <outlet property="delegate" destination="01D-sL-F57" id="sey-JP-SKi"/>
                                 </connections>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="noFav" translatesAutoresizingMaskIntoConstraints="NO" id="BAt-BK-iET">
+                                <rect key="frame" x="34" y="272" width="335" height="546"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o2V-pI-9hi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="KKj-2x-DKg" firstAttribute="top" secondItem="o2V-pI-9hi" secondAttribute="top" constant="21" id="0Wc-xa-kya"/>
-                            <constraint firstItem="PCs-x1-ZIw" firstAttribute="centerX" secondItem="KKj-2x-DKg" secondAttribute="centerX" id="870-hC-nCC"/>
+                            <constraint firstItem="PCs-x1-ZIw" firstAttribute="centerX" secondItem="KKj-2x-DKg" secondAttribute="centerX" constant="6.6666666666666572" id="870-hC-nCC"/>
                             <constraint firstItem="PCs-x1-ZIw" firstAttribute="top" secondItem="KKj-2x-DKg" secondAttribute="bottom" constant="43" id="KqC-jZ-tKZ"/>
-                            <constraint firstItem="KKj-2x-DKg" firstAttribute="width" secondItem="0Ki-AM-alX" secondAttribute="width" multiplier="0.268657" id="QTh-V9-VrD"/>
+                            <constraint firstItem="KKj-2x-DKg" firstAttribute="width" secondItem="0Ki-AM-alX" secondAttribute="width" multiplier="0.268657" constant="12.999886000000004" id="QTh-V9-VrD"/>
                             <constraint firstItem="PCs-x1-ZIw" firstAttribute="height" secondItem="KKj-2x-DKg" secondAttribute="height" multiplier="0.885714" id="lZC-pc-PLf"/>
                             <constraint firstItem="KKj-2x-DKg" firstAttribute="height" secondItem="o2V-pI-9hi" secondAttribute="height" multiplier="0.0400458" id="rWO-PG-Pia"/>
-                            <constraint firstItem="PCs-x1-ZIw" firstAttribute="width" secondItem="KKj-2x-DKg" secondAttribute="width" multiplier="3.10185" id="xYw-tk-56T"/>
-                            <constraint firstItem="KKj-2x-DKg" firstAttribute="centerX" secondItem="o2V-pI-9hi" secondAttribute="centerX" id="xd9-Gm-Frf"/>
+                            <constraint firstItem="PCs-x1-ZIw" firstAttribute="width" secondItem="KKj-2x-DKg" secondAttribute="width" multiplier="3.10185" constant="-40.32385000000005" id="xYw-tk-56T"/>
+                            <constraint firstItem="KKj-2x-DKg" firstAttribute="centerX" secondItem="o2V-pI-9hi" secondAttribute="centerX" constant="-6.5" id="xd9-Gm-Frf"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorite" image="heart.circle.fill" catalog="system" id="SxT-mA-q5w"/>
                     <connections>
+                        <outlet property="emptyStateImageView" destination="BAt-BK-iET" id="TMT-gg-HCB"/>
                         <outlet property="favoriteTable" destination="WJ3-yd-F5B" id="i2P-Zc-fTv"/>
                         <outlet property="mySegment" destination="PCs-x1-ZIw" id="27C-C8-IfD"/>
                     </connections>
@@ -347,6 +341,7 @@
         <image name="footballonbording" width="1024" height="1536"/>
         <image name="heart.circle.fill" catalog="system" width="128" height="123"/>
         <image name="homekit" catalog="system" width="128" height="104"/>
+        <image name="noFav" width="1024" height="1024"/>
         <image name="tennisonbording" width="1024" height="1536"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
