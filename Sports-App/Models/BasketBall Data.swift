@@ -78,7 +78,7 @@ struct BTeamResponse: Codable {
 struct BTeam: Codable {
     let teamKey: Int
     let teamName: String
-    let teamLogo: String
+    let teamLogo: String?
 
     enum CodingKeys: String, CodingKey {
         case teamKey = "team_key"

@@ -13,10 +13,10 @@ private let reuseIdentifier = "cell"
 class HomeViewController: UIViewController,  UICollectionViewDelegateFlowLayout, UICollectionViewDataSource  {
     
     let sports: [(name: String, imageName: String)] = [
-        ("Football", "footballonbording"),
-        ("Basketball", "basketballonbording"),
-        ("Tennis", "tennisonbording"),
-        ("Cricket", "cricketonbording")
+        ("Football", "foot"),
+        ("Basketball", "bask"),
+        ("Tennis", "tenn"),
+        ("Cricket", "circ")
     ]
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sportsLbl: UILabel!

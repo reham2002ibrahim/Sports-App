@@ -10,6 +10,7 @@ import Kingfisher
 
 class UpComingTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
+    @IBOutlet weak var noMatchImg: UIImageView!
     @IBOutlet weak var matchesCollectionView: UICollectionView!
     var matches : [Any]?
     var sportsType : MySportType?
@@ -35,9 +36,9 @@ class UpComingTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollec
     //        // Configure the view for the selected state
     //    }
     
-    func reloading(){
-        matchesCollectionView.reloadData()
-    }
+//    func reloading(){
+//        matchesCollectionView.reloadData()
+//    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return matches?.count ?? 0
     }
@@ -128,6 +129,12 @@ class UpComingTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollec
         let width = collectionView.frame.width * 0.7
         let height = collectionView.frame.height * 0.9
         return CGSize(width: width, height: height)
+    }
+    func reloading() {
+        let hasMatches = (matches?.isEmpty == false)
+        matchesCollectionView.isHidden = !hasMatches
+        noMatchImg.isHidden = hasMatches
+        matchesCollectionView.reloadData()
     }
     
 }

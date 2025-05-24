@@ -16,28 +16,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ors-6s-KhV">
+                                <rect key="frame" x="16" y="189" width="361" height="545"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zm-Aa-fmz">
-                                <rect key="frame" x="67" y="118" width="267" height="46"/>
+                                <rect key="frame" x="105" y="118" width="185" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" systemColor="tintColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ors-6s-KhV">
-                                <rect key="frame" x="35" y="210" width="330" height="505"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Ors-6s-KhV" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.839695" id="5aV-4o-hhl"/>
-                            <constraint firstItem="4Zm-Aa-fmz" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="HnI-Ot-nk7"/>
-                            <constraint firstItem="4Zm-Aa-fmz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="67" id="bh5-0E-Ven"/>
-                            <constraint firstItem="Ors-6s-KhV" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.592723" id="bya-yJ-IhK"/>
-                            <constraint firstItem="4Zm-Aa-fmz" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.0539906" id="hC0-ql-y05"/>
-                            <constraint firstItem="Ors-6s-KhV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="35" id="ujs-iX-Uzq"/>
-                            <constraint firstItem="Ors-6s-KhV" firstAttribute="top" secondItem="4Zm-Aa-fmz" secondAttribute="bottom" constant="46" id="wiM-3E-tz5"/>
-                            <constraint firstItem="4Zm-Aa-fmz" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.679389" id="ytR-kc-AIg"/>
+                            <constraint firstItem="Ors-6s-KhV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="7UH-o9-XpX"/>
+                            <constraint firstItem="4Zm-Aa-fmz" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="GUa-lV-jR5"/>
+                            <constraint firstItem="Ors-6s-KhV" firstAttribute="top" secondItem="4Zm-Aa-fmz" secondAttribute="bottom" constant="45" id="Lyq-GE-4RT"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Ors-6s-KhV" secondAttribute="bottom" constant="50" id="YCL-fh-v4B"/>
+                            <constraint firstItem="4Zm-Aa-fmz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="105" id="YXh-KK-5M6"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4Zm-Aa-fmz" secondAttribute="trailing" constant="103" id="iee-wn-vhp"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Ors-6s-KhV" secondAttribute="trailing" constant="16" id="w3p-7a-d0D"/>
                         </constraints>
                     </view>
                     <connections>

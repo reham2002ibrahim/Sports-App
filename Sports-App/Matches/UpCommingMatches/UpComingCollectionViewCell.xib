@@ -10,19 +10,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="upcomingMatchesCollectionCell" id="gTV-IL-0wX" customClass="UpComingCollectionViewCell" customModule="Sports_App" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="278" height="203"/>
+            <rect key="frame" x="0.0" y="0.0" width="278" height="205"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="278" height="203"/>
+                <rect key="frame" x="0.0" y="0.0" width="278" height="205"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myBackgroung" translatesAutoresizingMaskIntoConstraints="NO" id="FaI-2V-oPd">
-                        <rect key="frame" x="0.0" y="0.0" width="278" height="203"/>
+                        <rect key="frame" x="0.0" y="0.0" width="278" height="205"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nG3-93-klq">
                         <rect key="frame" x="20" y="115" width="90" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="0.8980392157" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -37,22 +37,15 @@
                         <rect key="frame" x="20" y="20" width="90" height="95"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dct-XA-9Kx">
-                        <rect key="frame" x="20" y="134" width="238" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="0.8980392157" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNA-7y-RII">
                         <rect key="frame" x="168" y="115" width="90" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="0.8980392157" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rh-5K-zgf">
-                        <rect key="frame" x="20" y="159" width="238" height="24"/>
+                        <rect key="frame" x="20" y="170" width="238" height="24"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="0.8980392157" colorSpace="calibratedRGB"/>
@@ -62,6 +55,13 @@
                         <rect key="frame" x="168" y="20" width="90" height="95"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dct-XA-9Kx">
+                        <rect key="frame" x="20" y="141" width="238" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="0.8980392157" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -72,7 +72,7 @@
                 <constraint firstAttribute="trailing" secondItem="FaI-2V-oPd" secondAttribute="trailing" id="nSV-o8-RH9"/>
                 <constraint firstItem="FaI-2V-oPd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="oWY-0c-um6"/>
             </constraints>
-            <size key="customSize" width="247" height="160"/>
+            <size key="customSize" width="247" height="162"/>
             <connections>
                 <outlet property="awayTeamLabel" destination="XNA-7y-RII" id="N4A-yR-7VR"/>
                 <outlet property="awayTeamLogo" destination="mdr-tD-pWu" id="Oct-sy-cbm"/>
@@ -81,7 +81,7 @@
                 <outlet property="homeTeamLogo" destination="2xb-3Q-X8i" id="TOD-9L-OXn"/>
                 <outlet property="timeLabel" destination="6Rh-5K-zgf" id="dX3-Gy-a5r"/>
             </connections>
-            <point key="canvasLocation" x="184.73282442748092" y="53.169014084507047"/>
+            <point key="canvasLocation" x="184.73282442748092" y="60.91549295774648"/>
         </collectionViewCell>
     </objects>
     <resources>

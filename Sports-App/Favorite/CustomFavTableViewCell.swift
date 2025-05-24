@@ -13,20 +13,25 @@ class CustomFavTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        contentView.layer.cornerRadius = 18
+        contentView.layer.borderWidth = 1.2
+        contentView.layer.borderColor = UIColor.systemBlue.withAlphaComponent(0.3).cgColor
+        contentView.layer.masksToBounds = true
+        backgroundColor = .clear
         
-        self.contentView.layer.cornerRadius = 20
-        self.contentView.layer.masksToBounds = true
-
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = 0.2
-        self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowRadius = 4
-        self.layer.masksToBounds = false
-
+        layer.shadowColor = UIColor.systemBlue.withAlphaComponent(0.18).cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 4)
+        layer.shadowOpacity = 0.7
+        layer.shadowRadius = 10
+        layer.masksToBounds = false
         
-        self.layer.cornerRadius = 20
+        favImg.layer.cornerRadius = favImg.frame.height / 2
+        favImg.layer.masksToBounds = true
+        favImg.layer.borderWidth = 1
+        favImg.layer.borderColor = UIColor.systemBlue.withAlphaComponent(0.2).cgColor
         
-        // Initialization code
+        favName.font = UIFont.boldSystemFont(ofSize: 18)
+        favName.textColor = UIColor.systemBlue
     }
     @IBOutlet weak var favImg: UIImageView!
 

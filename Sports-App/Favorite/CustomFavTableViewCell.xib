@@ -16,26 +16,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="297" height="83"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qCY-EB-2HK">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qCY-EB-2HK">
                         <rect key="frame" x="26.000000000000007" y="9" width="76.666666666666686" height="66"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kl-gS-aFT">
-                        <rect key="frame" x="110.66666666666669" y="36" width="185" height="18.666666666666671"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kl-gS-aFT">
+                        <rect key="frame" x="142" y="33" width="155" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.3434431006" blue="0.71203058419999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <constraints>
-                    <constraint firstItem="7kl-gS-aFT" firstAttribute="leading" secondItem="qCY-EB-2HK" secondAttribute="trailing" constant="8" symbolic="YES" id="BXM-iH-0wc"/>
-                    <constraint firstItem="qCY-EB-2HK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="CGb-QO-poz"/>
-                    <constraint firstItem="7kl-gS-aFT" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.225806" id="EQO-1a-6XM"/>
-                    <constraint firstItem="qCY-EB-2HK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="26" id="FrH-Na-vIF"/>
-                    <constraint firstItem="qCY-EB-2HK" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.795699" id="IMX-rr-rHt"/>
-                    <constraint firstItem="7kl-gS-aFT" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.622222" id="JV2-29-B6s"/>
-                    <constraint firstItem="qCY-EB-2HK" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.258333" id="S34-4p-ptM"/>
-                    <constraint firstItem="7kl-gS-aFT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="36" id="zpR-VV-QDc"/>
-                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>

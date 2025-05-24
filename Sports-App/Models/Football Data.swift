@@ -61,31 +61,66 @@ struct FMatch: Codable {
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
+//struct FTeamResponse: Codable {
+//    let success: Int
+//    let result: [FTeam]
+//}
+//
+//struct FTeam: Codable {
+////    let teamKey: String
+//    let teamKey: Int?
+//    let teamName: String?
+//    let teamLogo: String?
+//    let players: [FPlayer]?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case teamKey = "team_key"
+//        case teamName = "team_name"
+//        case teamLogo = "team_logo"
+//        case players
+//    }
+//}
+//
+///////////////////////////////////////////////////////////////////////////////////////////////
+//
+//struct FPlayerResponse: Codable {
+//    let success: Int
+//    let result: [FPlayer]
+//}
+//
+//struct FPlayer: Codable {
+//    let playerKey: Int?
+//    let playerName: String?
+//    let playerNumber: String?
+//    let playerImage: String?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case playerKey = "player_key"
+//        case playerName = "player_name"
+//        case playerNumber = "player_number"
+//        case playerImage = "player_image"
+//    }
+//}
+
 struct FTeamResponse: Codable {
     let success: Int
     let result: [FTeam]
 }
 
 struct FTeam: Codable {
-//    let teamKey: String
     let teamKey: Int?
     let teamName: String?
     let teamLogo: String?
     let players: [FPlayer]?
+    let coaches: [FCoach]?
 
     enum CodingKeys: String, CodingKey {
         case teamKey = "team_key"
         case teamName = "team_name"
         case teamLogo = "team_logo"
         case players
+        case coaches
     }
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-struct FPlayerResponse: Codable {
-    let success: Int
-    let result: [FPlayer]
 }
 
 struct FPlayer: Codable {
@@ -99,5 +134,13 @@ struct FPlayer: Codable {
         case playerName = "player_name"
         case playerNumber = "player_number"
         case playerImage = "player_image"
+    }
+}
+
+struct FCoach: Codable {
+    let coachName: String?
+
+    enum CodingKeys: String, CodingKey {
+        case coachName = "coach_name"
     }
 }

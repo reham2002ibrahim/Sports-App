@@ -9,15 +9,15 @@ import UIKit
 
 class MatchesTableViewController: UITableViewController, MatchesViewProtocol {
  
-    
-    
-    
-    
     var sportType: Int = 0
     var leagueID: Int = 0
     let presenter = MatchesPresenter()
     var upcomingMatches : [Any] = []
     var recentMatches : [Any] = []
+    var teamsOrPlayers: [Any] = []
+		
+    
+
 
     
     override func viewDidLoad() {
@@ -25,20 +25,18 @@ class MatchesTableViewController: UITableViewController, MatchesViewProtocol {
         tableView.register(UINib(nibName: "UpComingTableViewCell", bundle: nil), forCellReuseIdentifier: "upcomingMatchesTableCell")
         tableView.register(UINib(nibName: "RecentTableViewCell", bundle: nil), forCellReuseIdentifier: "recentMatchesTableCell")
         tableView.register(UINib(nibName: "MatchesTeamsTableViewCell", bundle: nil), forCellReuseIdentifier: "matchesTableViewCell")
-        let backgroundImage = UIImageView(frame: tableView.bounds)
-        backgroundImage.image = UIImage(named: "wbackground")
-        backgroundImage.contentMode = .scaleAspectFill
-        tableView.backgroundView = backgroundImage
+//        let backgroundImage = UIImageView(frame: tableView.bounds)
+//        backgroundImage.image = UIImage(named: "wbackground")
+//        backgroundImage.contentMode = .scaleAspectFill
+     //   tableView.backgroundView = backgroundImage
         presenter.vc=self
 
         fetchMatches()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+
     }
+    
+    
     
     // MARK: - Table view data source
     
@@ -61,7 +59,7 @@ class MatchesTableViewController: UITableViewController, MatchesViewProtocol {
             guard !upcomingMatches.isEmpty else { return cell }
             
             if let footballMatch = upcomingMatches as? [FMatch] {
-                print("cell \n \(footballMatch)")
+               // print("cell \n \(footballMatch)")
                 cell.matches = footballMatch
                 cell.sportsType = .football
             } else if let basketballMatch = upcomingMatches as? [BFixtureContainer] {
@@ -82,7 +80,7 @@ class MatchesTableViewController: UITableViewController, MatchesViewProtocol {
             }
             cell.reloading()
             return cell
-        case 1: 
+        case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "recentMatchesTableCell", for: indexPath) as! RecentTableViewCell
             let match = recentMatches[indexPath.row]
             
@@ -107,12 +105,36 @@ class MatchesTableViewController: UITableViewController, MatchesViewProtocol {
             }
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "matchesTableViewCell", for: indexPath) as! MatchesTeamsTableViewCell
-            return cell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "matchesTableViewCell", for: indexPath) as! MatchesTeamsTableViewCell
+                cell.data = teamsOrPlayers
+                cell.sportType = MySportType(intValue: sportType) ?? .football
+                
+                cell.onTeamSelected = { [weak self] teamId, teamName, teamLogo, sportType in
+                    self?.navigateToTeamViewController(
+                        teamId: teamId,
+                        teamName: teamName,
+                        teamLogo: teamLogo,
+                        sportType: sportType
+                    )
+                }
+                
+                cell.reloading()
+                return cell
             
         default: return UITableViewCell()
             
         }
+    }
+    private func navigateToTeamViewController(teamId: Int, teamName: String?, teamLogo: String?, sportType: MySportType) {
+        let storyboard = UIStoryboard(name: "Teams", bundle: nil)
+        guard let teamsVC = storyboard.instantiateViewController(withIdentifier: "TeamsViewController") as? TeamsViewController else { return }
+        print("Reham :: \(teamId)")
+        teamsVC.teamId = teamId
+        teamsVC.selectedTeamName = teamName
+        teamsVC.selectedTeamLogo = teamLogo
+        teamsVC.sportType = sportType.hashValue
+        
+        navigationController?.pushViewController(teamsVC, animated: true)
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section
@@ -120,13 +142,15 @@ class MatchesTableViewController: UITableViewController, MatchesViewProtocol {
         case 0:
             return 220
         case 1:
-            return 130
+            return 200
         case 2:
             return 150
         default:
             return 0
         }
     }
+    
+   
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
@@ -159,6 +183,7 @@ class MatchesTableViewController: UITableViewController, MatchesViewProtocol {
         return 40
     }
     
+    
     func fetchMatches() {
         guard  let mySportType = MySportType(intValue: sportType) else {
             showError("Invalid sport type")
@@ -177,6 +202,15 @@ class MatchesTableViewController: UITableViewController, MatchesViewProtocol {
             parameters: parameters,
             sportType: mySportType)
         presenter.fetchRecentMatches(url: baseURL, parameters: parameters, sportType: mySportType)
+        let teamsParams: [String: Any] = [
+                    "met": (mySportType == .tennis) ? "Players" : "Teams",
+                    "leagueId": "\(leagueID)"
+                ]
+                presenter.fetchTeamsOrPlayers(
+                    url: baseURL,
+                    parameters: teamsParams,
+                    sportType: mySportType
+                )
     }
 
     
@@ -189,63 +223,24 @@ class MatchesTableViewController: UITableViewController, MatchesViewProtocol {
         self.recentMatches = matches
         tableView.reloadData()
     }
+    func displayTeamsOrPlayers(_ data: [Any]) {
+           self.teamsOrPlayers = data
+           tableView.reloadData()
+       }
     
-    
-    
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+
+
     func showError(_ message: String) {
-        let alert = UIAlertController(
-            title: "Error",
-            message: message,
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        print (message)
+//        let alert = UIAlertController(
+//            title: "Error",
+//            message: message,
+//            preferredStyle: .alert
+//        )
+//        alert.addAction(UIAlertAction(title: "OK", style: .default))
+//        present(alert, animated: true)
         
     }
     
 }
+
