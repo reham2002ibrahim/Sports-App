@@ -107,7 +107,7 @@ class TeamsViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                     }.resume()
                 } else {
-                    cell.playerImg.image = UIImage(named: "leaguePlaceHolder")
+                    cell.playerImg.image = UIImage(named: "playerPlaceHolder")
                 }
             } else if let cricketPlayer = player as? CPlayer {
                 cell.playerName.text = cricketPlayer.playerName
@@ -121,7 +121,7 @@ class TeamsViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                     }.resume()
                 } else {
-                    cell.playerImg.image = UIImage(named: "leaguePlaceHolder")
+                    cell.playerImg.image = UIImage(named: "playerPlaceHolder")
                 }
             }
             cell.contentView.layer.borderWidth = 0.5
