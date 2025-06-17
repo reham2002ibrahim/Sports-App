@@ -4,6 +4,8 @@ Designed exclusively for iOS and built with using Swift, the app brings global s
 
 Whether you’re a die-hard football fan, a basketball enthusiast, or just keeping up with your favorite team, Shoot is here to keep you updated, even when you're offline.
 
+---
+
 🚀 Highlights
 
 - Structured using MVP (Model-View-Presenter)
@@ -38,7 +40,7 @@ Three segmented sections displayed in a modern compositional layout:
 - Dive into a team's profile: logo, name, history, and more.
 - Clean and elegant layout ensuring a focused fan experience.
 
-
+---
 Architecture & Testing
 
 Shoot is engineered with:
@@ -58,3 +60,32 @@ Shoot is engineered with:
 | Reachability       | Internet status monitoring       |
 | Shimmer            | Loading placeholders             |
 | XCTest             | Unit Testing                     |
+
+
+---
+📸 Demo Screens
+
+| Splash | Onbording | Home |
+|------|---------|--------|
+| ![Home](Sports-App/Assets.xcassets/1.png) | ![Leagues](Sports-App/Assets.xcassets/2.png) | ![Events](Sports-App/Assets.xcassets/3.png) |
+
+
+|  Footbal Leagues | Basketball Leagues | Tennis Leagues |
+|----------|-----------|-------|
+| ![Fav](Sports-App/Assets.xcassets/lfav.png)  | ![TL](Sports-App/Assets.xcassets/tl.png) | ![BL](Sports-App/Assets.xcassets/bl.png) |
+
+
+| Match Details | Match Details | Team Details |
+|----------|-----------|-------|
+| ![FootFav](Sports-App/Assets.xcassets/6.png) | ![TL](Sports-App/Assets.xcassets/7.png) | ![BL](Sports-App/Assets.xcassets/teams.png) |
+
+
+| No Favorites |  Favorites | Delete Confirmation |
+|--------------|------------|---------------------|
+| ![No Fav](Sports-App/Assets.xcassets/nofav.png) | ![FootFav](Sports-App/Assets.xcassets/footFav.png)  | ![Delete](Sports-App/Assets.xcassets/delete.png) |
+
+
+| No Matches | Shimmer | No Internet |
+|--------------|-----------|-------------|
+| ![Teams](Sports-App/Assets.xcassets/nomatches.png) | ![Offline](Sports-App/Assets.xcassets/4.png)  | ![nonet](Sports-App/Assets.xcassets/nointernet.png) |
+
