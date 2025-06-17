@@ -8,7 +8,7 @@ Whether you’re a die-hard football fan, a basketball enthusiast, or just keepi
 
 - Structured using MVP (Model-View-Presenter)
 - Fast & fluid UI with native Swift 
-- Smooth animations & feedback powered by Lottie** and Shimmer
+- Smooth animations & feedback powered by Lottie and Shimmer
 - Offline capabilities through CoreData
 - Fully localized & supports dark mode
 
@@ -17,7 +17,7 @@ Whether you’re a die-hard football fan, a basketball enthusiast, or just keepi
 
 🏠 Home Interface (Tabs)
 
-- Sports Explorer: Browse across a wide range of sports (football, tennis, basketball, cricker) fetched in real-time from AllSportsAPI:  https://allsportsapi.com/
+- Sports Explorer: Browse across a wide range of sports (football, tennis, basketball, cricker) fetched in real-time from [AllSportsAPI](https://allsportsapi.com/)
 - Favorites Hub: Access your starred leagues—persisted locally so you never lose them, even when offline.
 
 🏆 League Center
@@ -38,7 +38,6 @@ Three segmented sections displayed in a modern compositional layout:
 - Dive into a team's profile: logo, name, history, and more.
 - Clean and elegant layout ensuring a focused fan experience.
 
----
 
 Architecture & Testing
 
